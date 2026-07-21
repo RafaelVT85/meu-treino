@@ -379,6 +379,97 @@ const LEVELS = [
 ];
 
 // Each exercise slot has "options": array of 3 alternatives the user can pick from
+const GIF_MAP = {
+  "Agachamento sem peso": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/bodyweight-squat.gif",
+  "Agachamento sumo": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/adductors/sumo-squat.gif",
+  "Agachamento no banco": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/box-squat.gif",
+  "Agachamento goblet": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/goblet-squat.gif",
+  "Agachamento sumô c/ anilha": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/adductors/sumo-squat.gif",
+  "Agachamento pulsado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/goblet-squat.gif",
+  "Agachamento sumô pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/adductors/sumo-squat.gif",
+  "Agachamento goblet pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/goblet-squat.gif",
+  "Agachamento pulsado pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/goblet-squat.gif",
+  "Agachamento búlgaro": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/bulgarian-split-squat.gif",
+  "Agachamento búlgaro pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/bulgarian-split-squat.gif",
+  "Pistol squat assistido": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/pistol-squat.gif",
+  "Afundo estático": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/dumbbell-lunge.gif",
+  "Afundo reverso": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/reverse-lunge.gif",
+  "Afundo lateral": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/adductors/lateral-lunge.gif",
+  "Afundo com anilhas": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/dumbbell-lunge.gif",
+  "Afundo reverso c/ anilha": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/reverse-lunge.gif",
+  "Passada lateral c/ anilha": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/adductors/lateral-lunge.gif",
+  "Afundo com passada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/dumbbell-lunge.gif",
+  "Afundo búlgaro c/ anilha": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/bulgarian-split-squat.gif",
+  "Elevação de quadril": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/hip-thrust.gif",
+  "Coice de glúteo": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/donkey-kickback.gif",
+  "Hip thrust no banco": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/hip-thrust.gif",
+  "Hip thrust unilateral": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/single-leg-hip-thrust.gif",
+  "Hip thrust pulsado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/hip-thrust.gif",
+  "Hip thrust pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/hip-thrust.gif",
+  "Hip thrust unilateral pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/single-leg-hip-thrust.gif",
+  "Hip thrust pulsado pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/hip-thrust.gif",
+  "Stiff com anilhas": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/romanian-deadlift.gif",
+  "Stiff com anilhas pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/romanian-deadlift.gif",
+  "Stiff unilateral": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/single-leg-romanian-deadlift.gif",
+  "Step-up no banco": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/step-up.gif",
+  "Step-up pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/step-up.gif",
+  "Elevação de calcanhar": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/calves/standing-calf-raise.gif",
+  "Flexão de joelho": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/knee-push-up.gif",
+  "Flexão inclinada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/incline-push-up.gif",
+  "Supino com anilha": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/dumbbell-bench-press.gif",
+  "Flexão completa": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/push-up.gif",
+  "Flexão pegada larga": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/wide-grip-push-up.gif",
+  "Flexão diamante": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/diamond-push-up.gif",
+  "Flexão Pike": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/pike-push-up.gif",
+  "Flexão explosiva": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/plyometric-push-up.gif",
+  "Remada com anilha": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/dumbbell-one-arm-row.gif",
+  "Remada bilateral": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/dumbbell-bent-over-row.gif",
+  "Superman no tapete": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/spine/superman.gif",
+  "Remada unilateral": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/dumbbell-one-arm-row.gif",
+  "Remada bilateral inclinada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/dumbbell-bent-over-row.gif",
+  "Remada no banco invertida": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/dumbbell-bent-over-row.gif",
+  "Remada unilateral pesada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/dumbbell-one-arm-row.gif",
+  "Remada bilateral pesada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/dumbbell-bent-over-row.gif",
+  "Remada invertida pesada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/dumbbell-bent-over-row.gif",
+  "Elevação lateral": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-lateral-raise.gif",
+  "Elevação frontal": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-front-raise.gif",
+  "Elevação lateral leve": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-lateral-raise.gif",
+  "Elevação frontal leve": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-front-raise.gif",
+  "Elevação lateral pesada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-lateral-raise.gif",
+  "Desenvolvimento leve": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-shoulder-press.gif",
+  "Desenvolvimento c/ anilhas": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-shoulder-press.gif",
+  "Desenvolvimento Arnold": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/arnold-press.gif",
+  "Desenvolvimento pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-shoulder-press.gif",
+  "Rosca direta": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-curl.gif",
+  "Rosca alternada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-alternating-curl.gif",
+  "Rosca concentrada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/concentration-curl.gif",
+  "Rosca martelo": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/hammer-curl.gif",
+  "Rosca 21": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-curl.gif",
+  "Rosca inversa": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-curl.gif",
+  "Rosca concentrada pesada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/concentration-curl.gif",
+  "Rosca martelo pesada": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/hammer-curl.gif",
+  "Tríceps no banco": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/triceps-dip.gif",
+  "Tríceps coice": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/dumbbell-triceps-kickback.gif",
+  "Tríceps testa": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/skull-crusher.gif",
+  "Tríceps testa leve": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/skull-crusher.gif",
+  "Tríceps testa pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/skull-crusher.gif",
+  "Tríceps coice com anilha": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/dumbbell-triceps-kickback.gif",
+  "Mergulho no banco": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/triceps-dip.gif",
+  "Mergulho no banco pesado": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/triceps-dip.gif",
+  "Prancha no joelho": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/knee-plank.gif",
+  "Prancha completa": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/plank.gif",
+  "Prancha lateral": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/side-plank.gif",
+  "Prancha c/ elevação de perna": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/plank-leg-raise.gif",
+  "Abdominal crunch": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/crunch.gif",
+  "Abdominal bicicleta": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/bicycle-crunch.gif",
+  "Elevação de pernas": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/leg-raise.gif",
+  "Russian twist": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/russian-twist.gif",
+  "Ab wheel (sem roda)": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/plank.gif",
+  "Dragon flag assistido": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/leg-raise.gif",
+};
+
+const GIF_BASE = "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0";
+
 const EXERCISES = [
   // NÍVEL 1 — Iniciante (3 séries x 12 reps)
   [
@@ -1084,21 +1175,30 @@ function renderEx(){
     document.getElementById('ex-desc').textContent=ex.desc;
     document.getElementById('ex-tip').textContent=ex.tip||'';
   // Embed YouTube iframe — usuário toca play dentro do app
+  // Busca GIF da API ExerciseGymGifsDB (jsDelivr CDN, sem chave)
+  const gifUrl = GIF_MAP[ex.name] || '';
   const ytId = ex.yt || '';
-  if (ytId) {
+  if (gifUrl) {
     document.getElementById('video-area').innerHTML=`
-      <div onclick="openVideoModal('${ytId}','${ex.name.replace(/'/g,'\'')}')"
+      <div style="position:relative;width:100%;height:100%;background:#111;border-radius:var(--radius);overflow:hidden">
+        <img src="${gifUrl}"
+             alt="${ex.name}"
+             style="width:100%;height:100%;object-fit:contain;display:block;background:#111"
+             onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;color:var(--text3);flex-direction:column;gap:8px\'><i class=\'ti ti-dumbbell\' style=\'font-size:28px\'></i><span style=\'font-size:12px\'>Siga a descrição</span></div>'">
+        <div style="position:absolute;top:8px;left:8px;background:rgba(232,64,122,0.85);border-radius:6px;padding:2px 8px;font-size:10px;color:white;font-weight:600">
+          DEMO
+        </div>
+      </div>`;
+  } else if (ytId) {
+    document.getElementById('video-area').innerHTML=`
+      <div onclick="openVideoModal('${ytId}','${ex.name.replace(/'/g, "\'")}')"
            style="position:relative;width:100%;height:100%;cursor:pointer;background:#111;border-radius:var(--radius);overflow:hidden">
         <img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg"
-             style="width:100%;height:100%;object-fit:cover;display:block;opacity:0.8"
-             onerror="this.src='https://img.youtube.com/vi/${ytId}/mqdefault.jpg'">
+             style="width:100%;height:100%;object-fit:cover;display:block;opacity:0.8">
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
-          <div style="width:52px;height:52px;background:var(--pink);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(232,64,122,0.5)">
+          <div style="width:52px;height:52px;background:var(--pink);border-radius:50%;display:flex;align-items:center;justify-content:center">
             <i class="ti ti-player-play-filled" style="font-size:20px;color:white;margin-left:2px"></i>
           </div>
-        </div>
-        <div style="position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.6);border-radius:6px;padding:3px 8px;font-size:10px;color:rgba(255,255,255,0.8)">
-          ▶ ver referência
         </div>
       </div>`;
   } else {
@@ -1117,12 +1217,12 @@ function renderEx(){
   for(let i=idx+1;i<Math.min(idx+5,total);i++){
     const slot=EXERCISES[lv.num-1][i];
     const nex=getExercise(lv.num,i);
-    const thumbUrl = nex.yt ? `https://img.youtube.com/vi/${nex.yt}/default.jpg` : '';
+    const thumbUrl = GIF_MAP[nex.name] || (nex.yt ? `https://img.youtube.com/vi/${nex.yt}/default.jpg` : '');
     const item=document.createElement('div'); item.className='next-item';
     const optsBtnHtml = slot.options.map((opt,oi)=>{
       const chosen = st.chosen[lv.num-1][i]||0;
       const isChosen = oi===chosen;
-      const optThumb = opt.yt ? `https://img.youtube.com/vi/${opt.yt}/default.jpg` : '';
+      const optThumb = GIF_MAP[opt.name] || (opt.yt ? `https://img.youtube.com/vi/${opt.yt}/default.jpg` : '');
       const thumbHtml = optThumb
         ? `<img src="${optThumb}" alt="${opt.name}" style="width:34px;height:26px;border-radius:4px;object-fit:cover">`
         : `<span style="font-size:14px">💪</span>`;
@@ -1168,10 +1268,10 @@ function openSwap(){
   slot.options.forEach((opt,i)=>{
     const div=document.createElement('div');
     div.className='alt-option'+(i===currentChosen?' selected':'');
-    const thumbUrl = opt.yt ? `https://img.youtube.com/vi/${opt.yt}/mqdefault.jpg` : '';
+    const thumbUrl = GIF_MAP[opt.name] || (opt.yt ? `https://img.youtube.com/vi/${opt.yt}/mqdefault.jpg` : '');
     div.innerHTML=`
       <div class="alt-thumb">
-        ${thumbUrl ? `<img src="${thumbUrl}" alt="${opt.name}" onerror="this.parentElement.innerHTML='<span style=font-size:20px>💪</span>'">` : `<span style="font-size:20px">💪</span>`}
+        ${thumbUrl ? `<img src="${thumbUrl}" alt="${opt.name}" style="object-fit:contain;background:#111" onerror="this.parentElement.innerHTML='<span style=font-size:20px>💪</span>'">` : `<span style="font-size:20px">💪</span>`}
       </div>
       <div class="alt-info">
         <div class="alt-name">${opt.name}${i===0?' <span style="font-size:10px;color:var(--text3)">(padrão)</span>':''}</div>
