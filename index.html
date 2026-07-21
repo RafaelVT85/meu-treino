@@ -190,6 +190,31 @@
 
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 99px; }
+    /* ── Timeline ── */
+    .ex-timeline { display: flex; align-items: center; margin-bottom: 14px; overflow-x: auto; scrollbar-width: none; padding: 4px 2px; }
+    .ex-timeline::-webkit-scrollbar { display: none; }
+    .tl-item { display: flex; align-items: center; flex-shrink: 0; }
+    .tl-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; flex-shrink: 0; border: none; font-family: inherit; }
+    .tl-done { background: var(--pink); color: white; }
+    .tl-current { background: var(--pink); color: white; box-shadow: 0 0 0 3px rgba(232,64,122,0.2), 0 0 0 5px rgba(232,64,122,0.08); transform: scale(1.18); }
+    .tl-upcoming { background: var(--surface2); color: var(--text3); }
+    .tl-line { height: 2px; min-width: 8px; flex: 1; max-width: 20px; background: var(--border); }
+    .tl-line-done { background: var(--pink); }
+    /* ── Slide ── */
+    .ex-slide-wrap { overflow: hidden; }
+    .ex-slide-inner { display: flex; transition: transform 0.32s cubic-bezier(.4,0,.2,1); }
+    .ex-slide { min-width: 100%; flex-shrink: 0; }
+    /* ── Nav row ── */
+    .nav-btns-row { display: flex; gap: 10px; align-items: stretch; margin-bottom: 8px; }
+    .nav-btn-prev { display: flex; align-items: center; justify-content: center; padding: 14px 18px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface2); color: var(--text2); font-size: 18px; cursor: pointer; transition: all 0.15s; flex-shrink: 0; }
+    .nav-btn-prev:hover { border-color: var(--border2); color: var(--text); }
+    .cancel-btn { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--border); color: var(--text3); cursor: pointer; font-size: 14px; transition: all 0.15s; flex-shrink: 0; }
+    .cancel-btn:hover { background: rgba(220,50,50,0.15); border-color: rgba(220,50,50,0.3); color: #ff6060; }
+    .finish-early-btn { width: 100%; padding: 11px; border-radius: var(--radius); border: 1px solid var(--border); background: none; color: var(--text3); font-size: 13px; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.15s; margin-top: 6px; }
+    .finish-early-btn:hover { background: var(--pink-light); color: var(--pink); border-color: var(--lv1-border); }
+    .next-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 11px 12px; background: none; border: none; cursor: pointer; font-family: inherit; border-radius: var(--radius); }
+    .next-toggle:hover { background: rgba(255,255,255,0.03); }
+    .next-tog-icon { font-size: 13px; color: var(--text3); transition: transform 0.2s; display: inline-block; }
   </style>
 </head>
 <body>
@@ -229,42 +254,69 @@
 
   <!-- WORKOUT -->
   <div id="screen-workout" class="screen">
-    <div class="workout-header">
-      <button class="back-btn" onclick="goHome()"><i class="ti ti-arrow-left"></i> voltar</button>
-      <div class="workout-prog-wrap">
-        <span class="workout-prog-text" id="workout-prog">1 / 8</span>
-        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-bar"></div></div>
-      </div>
+
+    <!-- Header: pausar + cancelar -->
+    <div class="workout-header" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:10px">
+      <button class="back-btn" onclick="goHome()"><i class="ti ti-pause"></i> pausar</button>
+      <button class="cancel-btn" onclick="cancelWorkout()" title="Cancelar treino"><i class="ti ti-x"></i></button>
     </div>
 
-    <div class="video-area" id="video-area"></div>
+    <!-- Timeline de bolinhas -->
+    <div class="ex-timeline" id="ex-timeline"></div>
 
-    <div class="ex-card">
-      <div class="ex-card-top">
-        <div class="ex-text-block">
-          <span class="ex-muscle-tag" id="ex-muscle"></span>
-          <div class="ex-name" id="ex-name"></div>
-          <div class="ex-desc" id="ex-desc"></div>
+    <!-- Slide wrap -->
+    <div class="ex-slide-wrap">
+      <div class="ex-slide-inner" id="ex-slide-inner">
+        <div class="ex-slide" id="ex-slide-0">
+          <div class="video-area" id="video-area"></div>
+          <div class="ex-card" style="margin-top:10px">
+            <div class="ex-card-top">
+              <div class="ex-text-block">
+                <span class="ex-muscle-tag" id="ex-muscle"></span>
+                <div class="ex-name" id="ex-name"></div>
+                <div class="ex-desc" id="ex-desc"></div>
+              </div>
+              <div class="muscle-img-wrap" id="muscle-svg-wrap"></div>
+            </div>
+            <div class="ex-tip" id="ex-tip" style="margin-top:10px"></div>
+          </div>
         </div>
-        <div class="muscle-img-wrap" id="muscle-svg-wrap"></div>
       </div>
-      <div class="ex-tip" id="ex-tip" style="margin-top:10px"></div>
     </div>
 
-    <div style="display:flex;justify-content:center;margin-bottom:14px">
+    <!-- Trocar -->
+    <div style="display:flex;justify-content:center;margin:12px 0">
       <button class="swap-btn" id="swap-btn" onclick="openSwap()">
         <i class="ti ti-switch-2"></i> trocar exercício
       </button>
     </div>
 
-    <div class="next-section">
-      <div class="next-label">Próximos</div>
-      <div class="next-list" id="next-list"></div>
+    <!-- Próximos colapsável -->
+    <div class="next-section" id="next-section" style="margin-bottom:10px">
+      <button class="next-toggle" onclick="toggleNextSection()">
+        <span class="next-label" style="margin:0">Próximos exercícios</span>
+        <i class="ti ti-chevron-right next-tog-icon" id="next-tog-icon"></i>
+      </button>
+      <div id="next-body" style="display:none;padding:0 10px 10px">
+        <div class="next-list" id="next-list"></div>
+      </div>
     </div>
 
-    <button class="action-btn lv-1-btn" id="next-btn" onclick="nextExercise()">
-      Próximo <i class="ti ti-arrow-right"></i>
+    <!-- Botões de navegação -->
+    <div class="nav-btns-row">
+      <button class="nav-btn-prev" id="prev-btn" onclick="prevExercise()" style="display:none">
+        <i class="ti ti-arrow-left"></i>
+      </button>
+      <button class="action-btn lv-1-btn" id="next-btn" style="flex:1" onclick="nextExercise()">
+        Próximo <i class="ti ti-arrow-right"></i>
+      </button>
+    </div>
+
+    <!-- Concluir antecipado -->
+    <button class="finish-early-btn" id="finish-early-btn" onclick="finishEarly()" style="display:none">
+      <i class="ti ti-flag-check"></i> Concluir treino agora
     </button>
+
   </div>
 
   <!-- DONE -->
@@ -911,15 +963,95 @@ function getMuscleSVG(muscle) {
     <div class="muscle-img-label">${muscle}</div>`;
 }
 
+let _slideDir = 1;
+
+function renderTimeline(idx, total, lv) {
+  const tl = document.getElementById('ex-timeline');
+  if (!tl) return;
+  tl.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    // Line before dot (except first)
+    if (i > 0) {
+      const line = document.createElement('div');
+      line.className = 'tl-line' + (i <= idx ? ' tl-line-done' : '');
+      tl.appendChild(line);
+    }
+    const dot = document.createElement('button');
+    const state = i < idx ? 'tl-done' : i === idx ? 'tl-current' : 'tl-upcoming';
+    dot.className = 'tl-dot ' + state;
+    dot.innerHTML = i < idx ? '✓' : String(i + 1);
+    dot.title = getExercise(lv.num, i).name;
+    dot.onclick = () => { _slideDir = i > st.ex ? 1 : -1; st.ex = i; saveSession(); renderEx(); window.scrollTo(0,0); };
+    tl.appendChild(dot);
+  }
+  const cur = tl.querySelector('.tl-current');
+  if (cur) setTimeout(() => cur.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}), 60);
+}
+
+function animateSlide(dir, updateFn) {
+  const inner = document.getElementById('ex-slide-inner');
+  const slide = document.getElementById('ex-slide-0');
+  if (!inner || !slide) { updateFn(); return; }
+  // slide out
+  inner.style.transition = 'transform 0.30s cubic-bezier(.4,0,.2,1)';
+  inner.style.transform = 'translateX(' + (dir > 0 ? '-100%' : '100%') + ')';
+  setTimeout(() => {
+    inner.style.transition = 'none';
+    inner.style.transform = 'translateX(' + (dir > 0 ? '100%' : '-100%') + ')';
+    updateFn();
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        inner.style.transition = 'transform 0.30s cubic-bezier(.4,0,.2,1)';
+        inner.style.transform = 'translateX(0)';
+      });
+    });
+  }, 300);
+}
+
+function toggleNextSection() {
+  const body = document.getElementById('next-body');
+  const icon = document.getElementById('next-tog-icon');
+  if (!body) return;
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  if (icon) icon.style.transform = open ? '' : 'rotate(90deg)';
+}
+
+function cancelWorkout() {
+  document.getElementById('cancel-modal').classList.add('open');
+}
+function closeCancelModal() {
+  document.getElementById('cancel-modal').classList.remove('open');
+}
+function confirmCancel() {
+  clearSession(); st.t0 = null; st.inProgress = false;
+  closeCancelModal(); goHome();
+}
+function finishEarly() {
+  document.getElementById('finish-early-modal').classList.add('open');
+}
+function closeFinishEarlyModal() {
+  document.getElementById('finish-early-modal').classList.remove('open');
+}
+function confirmFinishEarly() {
+  closeFinishEarlyModal(); concludeWorkout();
+}
+function prevExercise() {
+  if (st.ex > 0) { _slideDir = -1; st.ex--; saveSession(); renderEx(); window.scrollTo(0,0); }
+}
+
 function renderEx(){
   const lv=getLv(); const idx=st.ex; const total=EXERCISES[lv.num-1].length;
   const ex=getExercise(lv.num, idx);
-  document.getElementById('workout-prog').textContent=`${idx+1} / ${total}`;
-  const bar=document.getElementById('progress-bar'); bar.style.width=`${((idx+1)/total)*100}%`; bar.style.background=lv.barColor;
-  const ms=document.getElementById('ex-muscle'); ms.className=`ex-muscle-tag ${lv.muscle}`; ms.textContent=ex.muscle;
-  document.getElementById('ex-name').textContent=ex.name;
-  document.getElementById('ex-desc').textContent=ex.desc;
-  document.getElementById('ex-tip').textContent=ex.tip||'';
+  // Timeline
+  renderTimeline(idx, total, lv);
+  // Update content with slide animation
+  const dir = _slideDir; _slideDir = 1;
+  function updateContent() {
+    const ms=document.getElementById('ex-muscle'); if(ms){ms.className=`ex-muscle-tag ${lv.muscle}`; ms.textContent=ex.muscle;}
+    document.getElementById('ex-name').textContent=ex.name;
+    document.getElementById('ex-desc').textContent=ex.desc;
+    document.getElementById('ex-tip').textContent=ex.tip||'';
   // Embed YouTube iframe — usuário toca play dentro do app
   const ytId = ex.yt || '';
   if (ytId) {
@@ -972,14 +1104,19 @@ function renderEx(){
       </div>`;
     nl.appendChild(item);
   }
-  if(!nl.innerHTML) nl.innerHTML='<div style="font-size:13px;color:var(--text3);padding:6px 0">Último exercício!</div>';
+  if(!nl.innerHTML) nl.innerHTML='<div style="font-size:13px;color:var(--text3);padding:6px 0 2px">Último exercício!</div>';
   const btn=document.getElementById('next-btn'); btn.className=`action-btn ${lv.btn}`;
   if(idx===total-1){btn.innerHTML='Concluir treino <i class="ti ti-check"></i>';btn.onclick=concludeWorkout;}
   else{btn.innerHTML='Próximo <i class="ti ti-arrow-right"></i>';btn.onclick=nextExercise;}
+  // Prev + finish-early buttons
+  const prevBtn=document.getElementById('prev-btn'); if(prevBtn) prevBtn.style.display=idx>0?'flex':'none';
+  const earlyBtn=document.getElementById('finish-early-btn'); if(earlyBtn) earlyBtn.style.display=idx>0?'flex':'none';
+  } // end updateContent
+  animateSlide(dir, updateContent);
 }
 
 function toggleSet(ei,sn){const s=st.sets[ei];const p=s.indexOf(sn);if(p>=0)s.splice(p,1);else s.push(sn);saveSession();renderEx();}
-function nextExercise(){const lv=getLv();if(st.ex<EXERCISES[lv.num-1].length-1){st.ex++;saveSession();renderEx();window.scrollTo(0,0);}}
+function nextExercise(){const lv=getLv();if(st.ex<EXERCISES[lv.num-1].length-1){_slideDir=1;st.ex++;saveSession();renderEx();window.scrollTo(0,0);}}
 
 // Quick swap from next-list (before exercise is done)
 function quickSwap(slotIdx, optIdx) {
@@ -1179,5 +1316,33 @@ renderCal(); updateHome();
   }
 })();
 </script>
+<!-- CANCEL MODAL -->
+<div class="modal-overlay" id="cancel-modal" onclick="if(event.target===this)closeCancelModal()">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Cancelar treino?</div>
+    <div class="modal-sub">O progresso de hoje será perdido e o treino não será contabilizado.</div>
+    <button onclick="confirmCancel()" style="width:100%;padding:13px;border-radius:var(--radius-sm);border:none;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;color:white;background:#D04040;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px">
+      <i class="ti ti-trash"></i> Sim, cancelar treino
+    </button>
+    <button onclick="closeCancelModal()" style="width:100%;padding:13px;border-radius:var(--radius-sm);border:1px solid var(--border);font-size:14px;cursor:pointer;font-family:inherit;color:var(--text2);background:var(--surface2)">
+      Continuar treinando
+    </button>
+  </div>
+</div>
+<!-- FINISH EARLY MODAL -->
+<div class="modal-overlay" id="finish-early-modal" onclick="if(event.target===this)closeFinishEarlyModal()">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Concluir treino agora?</div>
+    <div class="modal-sub">O treino de hoje será registrado com os exercícios feitos até aqui.</div>
+    <button onclick="confirmFinishEarly()" class="modal-confirm" style="margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px">
+      <i class="ti ti-flag-check"></i> Sim, concluir agora
+    </button>
+    <button onclick="closeFinishEarlyModal()" style="width:100%;padding:13px;border-radius:var(--radius-sm);border:1px solid var(--border);font-size:14px;cursor:pointer;font-family:inherit;color:var(--text2);background:var(--surface2)">
+      Continuar treinando
+    </button>
+  </div>
+</div>
 </body>
 </html>
