@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Meu Treino 🌸</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.6.0/dist/tabler-icons.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
@@ -33,8 +33,8 @@
       --lv4: #F0A030;   --lv4-bg: rgba(240,160,48,0.12);   --lv4-border: rgba(240,160,48,0.3);
     }
 
-    html, body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100dvh; }
-    .app { max-width: 420px; margin: 0 auto; padding: 20px 16px 32px; min-height: 100dvh; }
+    html, body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100dvh; overflow-x: hidden; width: 100%; }
+    .app { max-width: 420px; margin: 0 auto; padding: 20px 16px env(safe-area-inset-bottom, 32px); min-height: 100dvh; width: 100%; }
     .screen { display: none; }
     .screen.active { display: block; }
 
@@ -63,7 +63,7 @@
 
     /* Start button — sempre pink */
     .start-btn { width: 100%; padding: 16px; border-radius: var(--radius); border: none; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; color: white; background: var(--pink); transition: all 0.15s; font-family: inherit; margin-bottom: 16px; letter-spacing: -0.2px; box-shadow: 0 4px 20px var(--pink-glow); }
-    .start-btn:hover { background: var(--pink-dark); transform: translateY(-1px); box-shadow: 0 6px 24px var(--pink-glow); }
+    @media (hover: hover) { .start-btn:hover { background: var(--pink-dark); transform: translateY(-1px); box-shadow: 0 6px 24px var(--pink-glow); } }
     .start-btn:active { transform: translateY(0); }
     .start-btn.resume { background: transparent; border: 1.5px solid var(--pink); color: var(--pink); box-shadow: none; }
     .start-btn.resume:hover { background: var(--pink-light); }
@@ -110,8 +110,8 @@
     .progress-bar-fill { height: 100%; border-radius: 99px; transition: width 0.4s; }
 
     /* Video */
-    .video-area { background: var(--surface2); border-radius: var(--radius); aspect-ratio: 16/9; margin-bottom: 0; overflow: hidden; position: relative; width: 100%; }
-    .video-area iframe { width: 100%; height: 100%; border: none; display: block; }
+    .video-area { background: var(--surface2); border-radius: var(--radius); aspect-ratio: 16/9; overflow: hidden; position: relative; width: 100%; display: block; }
+    .video-area iframe { width: 100%; height: 100%; border: none; display: block; position: absolute; inset: 0; }
 
     /* Exercise card */
     .ex-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; }
@@ -125,9 +125,10 @@
     .ex-name { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.2; letter-spacing: -0.3px; }
     .ex-desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 6px; }
     .ex-tip { font-size: 11px; color: var(--text3); font-style: italic; padding: 6px 10px; background: var(--surface2); border-radius: 8px; border-left: 2px solid var(--border2); }
-    .muscle-img-wrap { width: 80px; height: 100px; flex-shrink: 0; border-radius: 10px; overflow: hidden; background: var(--surface2); position: relative; }
+    .muscle-img-wrap { width: 80px; height: 100px; flex-shrink: 0; border-radius: 10px; overflow: hidden; background: #f0ede6; position: relative; }
     .muscle-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .muscle-img-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); padding: 3px 4px; font-size: 8px; color: rgba(255,255,255,0.9); text-align: center; font-weight: 500; line-height: 1.2; }
+    .muscle-img-wrap svg { width: 100%; height: auto; display: block; }
+    .muscle-img-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(232,64,122,0.85); padding: 3px 4px; font-size: 8px; color: white; text-align: center; font-weight: 600; line-height: 1.3; letter-spacing: 0.02em; }
 
     /* Swap button */
     .swap-btn { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: var(--pink); background: var(--pink-light); border: 1px solid var(--lv1-border); border-radius: 99px; padding: 9px 16px; cursor: pointer; font-family: inherit; transition: all 0.15s; margin: 0 auto 14px; }
@@ -150,15 +151,15 @@
 
     /* Action button */
     .action-btn { width: 100%; padding: 15px; border-radius: var(--radius); color: white; border: none; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; letter-spacing: -0.2px; }
-    .action-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    @media (hover: hover) { .action-btn:hover { filter: brightness(1.1); transform: translateY(-1px); } }
     .action-btn:active { transform: translateY(0); }
     /* Todos os níveis usam pink como primário */
     .lv-1-btn, .lv-2-btn, .lv-3-btn, .lv-4-btn { background: var(--pink); box-shadow: 0 4px 16px var(--pink-glow); }
 
     /* Swap modal */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; backdrop-filter: blur(4px); }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
     .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal-sheet { background: var(--surface); border-radius: 20px 20px 0 0; padding: 20px 16px 36px; width: 100%; max-width: 420px; transform: translateY(40px); transition: transform 0.28s cubic-bezier(.4,0,.2,1); border-top: 1px solid var(--border); }
+    .modal-sheet { background: var(--surface); border-radius: 20px 20px 0 0; padding: 20px 16px max(36px, env(safe-area-inset-bottom, 36px)); width: 100%; max-width: 420px; transform: translateY(40px); transition: transform 0.28s cubic-bezier(.4,0,.2,1); border-top: 1px solid var(--border); }
     .modal-overlay.open .modal-sheet { transform: translateY(0); }
     .modal-handle { width: 36px; height: 4px; background: var(--border2); border-radius: 99px; margin: 0 auto 18px; }
     .modal-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
@@ -201,9 +202,9 @@
     .tl-line { height: 2px; min-width: 8px; flex: 1; max-width: 20px; background: var(--border); }
     .tl-line-done { background: var(--pink); }
     /* ── Slide ── */
-    .ex-slide-wrap { overflow: hidden; width: 100%; }
-    .ex-slide-inner { display: flex; transition: transform 0.32s cubic-bezier(.4,0,.2,1); width: 100%; }
-    .ex-slide { min-width: 100%; width: 100%; flex-shrink: 0; box-sizing: border-box; }
+    .ex-slide-wrap { overflow: hidden; width: 100%; position: relative; }
+    .ex-slide-inner { display: flex; transition: transform 0.32s cubic-bezier(.4,0,.2,1); width: 100%; will-change: transform; }
+    .ex-slide { min-width: 100%; width: 100%; flex-shrink: 0; box-sizing: border-box; overflow: hidden; }
     /* ── Nav row ── */
     .nav-btns-row { display: flex; gap: 10px; align-items: stretch; margin-bottom: 8px; }
     .nav-btn-prev { display: flex; align-items: center; justify-content: center; padding: 14px 18px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface2); color: var(--text2); font-size: 18px; cursor: pointer; transition: all 0.15s; flex-shrink: 0; }
@@ -379,180 +380,179 @@ const LEVELS = [
 
 // Each exercise slot has "options": array of 3 alternatives the user can pick from
 const EXERCISES = [
-  // NÍVEL 1 — Iniciante
+  // NÍVEL 1 — Iniciante (3 séries x 12 reps)
   [
     { options: [
-      { name:"Agachamento sem peso",   muscle:"Glúteo + Perna",     icon:"ti-arrow-down-circle", desc:"Pés na largura dos ombros, braços à frente. Desça devagar até as coxas ficarem paralelas. Suba empurrando os calcanhares.", tip:"Dica: olhe para frente, não para baixo.", yt:"C_VtOYc6j5c" },
-      { name:"Agachamento sumo leve",  muscle:"Glúteo + Adutores",  icon:"ti-arrow-down-circle", desc:"Pés bem abertos, pontas para fora. Desça abrindo os joelhos. Ativa mais o glúteo e a parte interna da coxa.", tip:"Dica: joelhos na direção das pontas dos pés.", yt:"BqnlloV6qMc" },
-      { name:"Agachamento no banco",   muscle:"Glúteo + Perna",     icon:"ti-arrow-down-circle", desc:"Fique de costas para o banquinho. Desça como se fosse sentar, toque levemente o banco e suba. Ótimo para aprender a profundidade certa.", tip:"Dica: não sente — só toque e suba!", yt:"aclHkVaku9U" },
+      { name:"Agachamento sem peso",    muscle:"Glúteo + Perna",     icon:"ti-arrow-down-circle", desc:"Pés na largura dos ombros, braços à frente. Desça até as coxas ficarem paralelas. Suba empurrando os calcanhares.", tip:"Dica: olhe para frente, não para baixo.", yt:"aclHkVaku9U" },
+      { name:"Agachamento sumo",        muscle:"Glúteo + Adutores",  icon:"ti-arrow-down-circle", desc:"Pés bem abertos, pontas para fora. Desça abrindo os joelhos. Ativa mais o glúteo e a parte interna da coxa.", tip:"Dica: joelhos na direção das pontas dos pés.", yt:"U9_ZBFqBFgE" },
+      { name:"Agachamento no banco",    muscle:"Glúteo + Perna",     icon:"ti-arrow-down-circle", desc:"De costas para o banquinho. Desça como se fosse sentar, toque levemente e suba. Aprende a profundidade certa.", tip:"Dica: não sente — só toque e suba!", yt:"nELF-qBFVdI" },
     ]},
     { options: [
-      { name:"Afundo estático",        muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Um pé à frente, outro atrás. Desça o joelho de trás em direção ao chão sem encostar. Suba e repita. Troque a perna a cada série.", tip:"Dica: mantenha o tronco ereto.", yt:"wrwwXE_x-pQ" },
-      { name:"Afundo reverso",         muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Em vez de avançar, recue um pé descendo o joelho de trás. Mais suave para os joelhos que o afundo tradicional.", tip:"Dica: ótima opção para quem sente desconforto no joelho.", yt:"D7KaRcUTQeE" },
-      { name:"Elevação de calcanhar",  muscle:"Panturrilha",          icon:"ti-walk", desc:"Em pé, suba nas pontas dos pés e desça devagar. Pode apoiar levemente numa parede para equilíbrio.", tip:"Dica: suba bem alto e desça com controle total.", yt:"0HVbPKTOmOQ" },
+      { name:"Afundo estático",         muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Um pé à frente, outro atrás. Desça o joelho de trás sem encostar. Suba e repita. Troque a perna a cada série.", tip:"Dica: mantenha o tronco ereto.", yt:"QOVaHwm-Q6U" },
+      { name:"Afundo reverso",          muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Recue um pé descendo o joelho de trás. Mais suave para os joelhos que o afundo tradicional.", tip:"Dica: ótima opção para quem sente desconforto no joelho.", yt:"D7KaRcUTQeE" },
+      { name:"Afundo lateral",          muscle:"Glúteo + Adutores",  icon:"ti-walk", desc:"Dê um passo largo para o lado dobrando o joelho da perna que avançou. A outra fica esticada.", tip:"Dica: mantenha o pé todo no chão.", yt:"QOVaHwm-Q6U" },
     ]},
     { options: [
-      { name:"Flexão de joelho",          muscle:"Peito + Tríceps", icon:"ti-arrows-down-up", desc:"Apoie mãos e joelhos no tapete. Dobre os cotovelos descendo o peito em direção ao chão. Empurre de volta.", tip:"Dica: mantenha o corpo alinhado da cabeça aos joelhos.", yt:"jWxvty2KROs" },
-      { name:"Flexão inclinada no banco", muscle:"Peito + Tríceps", icon:"ti-arrows-down-up", desc:"Mãos no banco, corpo inclinado. Dobre os cotovelos descendo o peito em direção ao banco. Mais fácil que a flexão normal.", tip:"Dica: quanto mais alto o banco, mais fácil.", yt:"jWxvty2KROs" },
-      { name:"Supino com anilha leve",    muscle:"Peito + Tríceps", icon:"ti-arrows-down-up", desc:"Deitada no tapete, anilhas acima do peito. Dobre os cotovelos descendo as anilhas lateralmente e empurre de volta.", tip:"Dica: cotovelos a 45° do corpo, não abertos demais.", yt:"IODxDxX7oi4" },
+      { name:"Flexão de joelho",        muscle:"Peito + Tríceps",    icon:"ti-arrows-down-up", desc:"Apoie mãos e joelhos no tapete. Dobre os cotovelos descendo o peito em direção ao chão. Empurre de volta.", tip:"Dica: mantenha o corpo alinhado da cabeça aos joelhos.", yt:"jWxvty2KROs" },
+      { name:"Flexão inclinada",        muscle:"Peito + Tríceps",    icon:"ti-arrows-down-up", desc:"Mãos no banco, corpo inclinado. Dobre os cotovelos descendo o peito. Mais fácil que a flexão normal.", tip:"Dica: quanto mais alto o banco, mais fácil.", yt:"cfns6xCnDfI" },
+      { name:"Supino com anilha",       muscle:"Peito + Tríceps",    icon:"ti-arrows-down-up", desc:"Deitada no tapete, anilhas acima do peito. Dobre os cotovelos lateralmente e empurre de volta.", tip:"Dica: cotovelos a 45° do corpo, não abertos demais.", yt:"IODxDxX7oi4" },
     ]},
     { options: [
-      { name:"Remada com anilha leve",  muscle:"Costas",          icon:"ti-arrow-back-up", desc:"Apoie um joelho e a mão no banquinho. Com anilha leve, puxe o cotovelo para trás até a mão chegar na cintura. Desça controlado.", tip:"Dica: comece com 2 a 4 kg.", yt:"GZbfZ033f74" },
-      { name:"Remada bilateral inclinada", muscle:"Costas",       icon:"ti-arrow-back-up", desc:"Inclinada para frente, anilhas nas mãos. Puxe os dois cotovelos para trás ao mesmo tempo até as anilhas chegarem na cintura.", tip:"Dica: aperte as escápulas no topo do movimento.", yt:"6TSP1TRMUzs" },
-      { name:"Superman no tapete",      muscle:"Lombar + Costas", icon:"ti-arrow-back-up", desc:"Deitada de barriga para baixo no tapete. Eleve braços e pernas ao mesmo tempo, segure 2 segundos e desça.", tip:"Dica: fortalecer a lombar previne lesões.", yt:"z6PJMT2y8GQ" },
+      { name:"Remada com anilha",       muscle:"Costas",             icon:"ti-arrow-back-up", desc:"Apoie um joelho e a mão no banco. Puxe o cotovelo para trás até a mão chegar na cintura. Desça controlado.", tip:"Dica: comece com 2 a 4 kg.", yt:"GZbfZ033f74" },
+      { name:"Remada bilateral",        muscle:"Costas",             icon:"ti-arrow-back-up", desc:"Inclinada para frente, anilhas nas mãos. Puxe os dois cotovelos para trás simultaneamente.", tip:"Dica: aperte as escápulas no topo do movimento.", yt:"6TSP1TRMUzs" },
+      { name:"Superman no tapete",      muscle:"Lombar + Costas",    icon:"ti-arrow-back-up", desc:"Deitada de barriga para baixo. Eleve braços e pernas ao mesmo tempo, segure 2 segundos e desça.", tip:"Dica: fortalecer a lombar previne lesões.", yt:"z6PJMT2y8GQ" },
     ]},
     { options: [
-      { name:"Elevação lateral leve",   muscle:"Ombro lateral",   icon:"ti-arrows-left-right", desc:"Em pé, anilhas nas mãos ao lado do corpo. Eleve os braços lateralmente até a altura dos ombros. Desça devagar.", tip:"Dica: cotovelo levemente dobrado, não trave.", yt:"3VcKaXpzqRo" },
-      { name:"Elevação frontal leve",   muscle:"Ombro anterior",  icon:"ti-arrows-left-right", desc:"Em pé, anilhas na frente das coxas. Eleve um braço à frente até a altura dos ombros. Alterne os braços.", tip:"Dica: não balance o corpo para ajudar.", yt:"qEwKCR5JCog" },
-      { name:"Desenvolvimento leve",    muscle:"Ombro completo",  icon:"ti-arrows-up", desc:"Sentada, anilhas leves na altura dos ombros. Empurre para cima até quase juntar as mãos. Desça controlado.", tip:"Dica: ótimo introdutório para o ombro.", yt:"qEwKCR5JCog" },
+      { name:"Elevação lateral",        muscle:"Ombro lateral",      icon:"ti-arrows-left-right", desc:"Em pé, anilhas ao lado do corpo. Eleve lateralmente até a altura dos ombros. Desça devagar.", tip:"Dica: cotovelo levemente dobrado, não trave.", yt:"3VcKaXpzqRo" },
+      { name:"Elevação frontal",        muscle:"Ombro anterior",     icon:"ti-arrows-left-right", desc:"Anilhas na frente das coxas. Eleve um braço à frente até a altura dos ombros. Alterne.", tip:"Dica: não balance o corpo para ajudar.", yt:"qEwKCR5JCog" },
+      { name:"Desenvolvimento leve",    muscle:"Ombro completo",     icon:"ti-arrows-up", desc:"Anilhas leves na altura dos ombros. Empurre para cima até quase juntar as mãos. Desça controlado.", tip:"Dica: não trave os cotovelos no topo.", yt:"wr1W4LMoZW4" },
     ]},
     { options: [
-      { name:"Rosca com anilha",        muscle:"Bíceps",          icon:"ti-arrow-up", desc:"Em pé, cotovelos colados no corpo. Suba a anilha girando o punho para cima e desça bem devagar.", tip:"Dica: não balance o corpo para ajudar.", yt:"ykJmrZ5v0Oo" },
-      { name:"Rosca alternada",         muscle:"Bíceps",          icon:"ti-arrow-up", desc:"Em pé, uma anilha em cada mão. Suba uma por vez girando o punho no topo. Alterne os braços.", tip:"Dica: mantenha os cotovelos fixos no corpo.", yt:"sAq_ocpRh_I" },
-      { name:"Rosca concentrada",       muscle:"Bíceps",          icon:"ti-arrow-up", desc:"Sentada no banquinho, cotovelo apoiado na coxa interna. Suba a anilha em direção ao ombro e desça.", tip:"Dica: isola muito bem o bíceps.", yt:"ykJmrZ5v0Oo" },
+      { name:"Rosca direta",            muscle:"Bíceps",             icon:"ti-arrow-up", desc:"Em pé, cotovelos colados no corpo. Suba a anilha girando o punho para cima e desça bem devagar.", tip:"Dica: não balance o corpo para ajudar.", yt:"ykJmrZ5v0Oo" },
+      { name:"Rosca alternada",         muscle:"Bíceps",             icon:"ti-arrow-up", desc:"Uma anilha em cada mão. Suba uma por vez girando o punho no topo. Alterne os braços.", tip:"Dica: mantenha os cotovelos fixos no corpo.", yt:"sAq_ocpRh_I" },
+      { name:"Rosca concentrada",       muscle:"Bíceps",             icon:"ti-arrow-up", desc:"Sentada, cotovelo apoiado na coxa interna. Suba a anilha em direção ao ombro e desça.", tip:"Dica: isola muito bem o bíceps.", yt:"Jvj2wV0vOYU" },
     ]},
     { options: [
-      { name:"Tríceps no banco",        muscle:"Tríceps",         icon:"ti-arrow-down", desc:"Mãos na borda do banquinho, pernas estendidas à frente. Dobre os cotovelos descendo o quadril e suba.", tip:"Dica: mantenha as costas coladas ao banco.", yt:"0326dy_-CzM" },
-      { name:"Tríceps coice",           muscle:"Tríceps",         icon:"ti-arrow-down", desc:"Apoiada no banco com um joelho e mão. Cotovelo dobrado com anilha. Estenda o braço para trás até ficar reto.", tip:"Dica: o cotovelo fica fixo — só o antebraço se move.", yt:"d_KZxkY_0cM" },
-      { name:"Tríceps testa leve",      muscle:"Tríceps",         icon:"ti-arrow-down", desc:"Deitada no tapete, anilha acima da cabeça. Dobre os cotovelos até a anilha quase tocar a testa. Empurre.", tip:"Dica: cotovelos apontando para o teto.", yt:"d_KZxkY_0cM" },
+      { name:"Tríceps no banco",        muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Mãos na borda do banquinho, pernas estendidas. Dobre os cotovelos descendo o quadril e suba.", tip:"Dica: mantenha as costas próximas ao banco.", yt:"0326dy_-CzM" },
+      { name:"Tríceps coice",           muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Apoiada no banco com um joelho. Cotovelo dobrado com anilha. Estenda o braço para trás até ficar reto.", tip:"Dica: o cotovelo fica fixo — só o antebraço se move.", yt:"d_KZxkY_0cM" },
+      { name:"Tríceps testa",           muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Deitada no tapete, anilha acima da cabeça. Dobre os cotovelos até a anilha quase tocar a testa. Empurre.", tip:"Dica: cotovelos apontando para o teto.", yt:"yr739FnFiEY" },
     ]},
     { options: [
-      { name:"Prancha no joelho",       muscle:"Abdômen + Core",  icon:"ti-minus", desc:"Apoio nos antebraços e joelhos no tapete. Corpo reto, barriga contraída. Segure 20 a 30 segundos por série.", tip:"Dica: respire normalmente, não prenda o ar.", yt:"pSHjTRCQxIw" },
-      { name:"Abdominal crunch",        muscle:"Abdômen",         icon:"ti-minus", desc:"Deitada, joelhos dobrados, mãos atrás da cabeça. Eleve o tronco em direção aos joelhos. Desça devagar.", tip:"Dica: não puxe o pescoço com as mãos.", yt:"9FGilxCbdz8" },
-      { name:"Elevação de pernas",      muscle:"Abdômen inferior", icon:"ti-minus", desc:"Deitada, mãos ao lado do corpo. Eleve as pernas esticadas até 90° e desça devagar sem encostar no chão.", tip:"Dica: lombar colada no tapete o tempo todo.", yt:"9FGilxCbdz8" },
+      { name:"Prancha no joelho",       muscle:"Abdômen + Core",     icon:"ti-minus", desc:"Apoio nos antebraços e joelhos. Corpo reto, barriga contraída. Segure 20 a 30 segundos por série.", tip:"Dica: respire normalmente, não prenda o ar.", yt:"pSHjTRCQxIw" },
+      { name:"Abdominal crunch",        muscle:"Abdômen",            icon:"ti-minus", desc:"Deitada, joelhos dobrados, mãos atrás da cabeça. Eleve o tronco em direção aos joelhos. Desça devagar.", tip:"Dica: não puxe o pescoço com as mãos.", yt:"Xyd_fa5zoEU" },
+      { name:"Elevação de pernas",      muscle:"Abdômen inferior",   icon:"ti-minus", desc:"Deitada, mãos ao lado do corpo. Eleve as pernas esticadas até 90° e desça devagar sem encostar no chão.", tip:"Dica: lombar colada no tapete o tempo todo.", yt:"l4kQd9eWclE" },
     ]},
   ],
-  // NÍVEL 2 — Intermediário
+  // NÍVEL 2 — Intermediário (4 séries x 12 reps)
   [
     { options: [
-      { name:"Agachamento goblet",         muscle:"Glúteo + Perna",      icon:"ti-arrow-down-circle", desc:"Segure uma anilha com as duas mãos na frente do peito. Agache até as coxas ficarem paralelas. Suba empurrando os calcanhares.", tip:"Dica: use 6 a 10 kg.", yt:"MeIiIdhvXT4" },
-      { name:"Agachamento sumô c/ anilha", muscle:"Glúteo + Adutores",   icon:"ti-arrow-down-circle", desc:"Pés bem abertos, anilha pendurada entre as pernas. Agache abrindo os joelhos para ativar glúteo e parte interna.", tip:"Dica: ativa muito o glúteo e a parte interna.", yt:"BqnlloV6qMc" },
-      { name:"Agachamento pulsado",        muscle:"Glúteo + Quadríceps", icon:"ti-arrow-down-circle", desc:"Agache com anilha goblet. No ponto mais baixo faça 3 pulsos pequenos antes de subir. Mantém tensão no músculo.", tip:"Dica: mantém o músculo em tensão por mais tempo.", yt:"C_VtOYc6j5c" },
+      { name:"Agachamento goblet",      muscle:"Glúteo + Perna",     icon:"ti-arrow-down-circle", desc:"Segure uma anilha com as duas mãos na frente do peito. Agache até as coxas ficarem paralelas.", tip:"Dica: use 6 a 10 kg.", yt:"MeIiIdhvXT4" },
+      { name:"Agachamento sumô c/ anilha", muscle:"Glúteo + Adutores", icon:"ti-arrow-down-circle", desc:"Pés bem abertos, anilha entre as pernas. Agache abrindo os joelhos.", tip:"Dica: ativa muito o glúteo e a parte interna.", yt:"U9_ZBFqBFgE" },
+      { name:"Agachamento pulsado",     muscle:"Glúteo + Quadríceps", icon:"ti-arrow-down-circle", desc:"Agache com anilha goblet. No ponto mais baixo faça 3 pulsos pequenos antes de subir.", tip:"Dica: mantém o músculo em tensão por mais tempo.", yt:"MeIiIdhvXT4" },
     ]},
     { options: [
-      { name:"Afundo com anilhas",         muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Com anilhas nas mãos, dê um passo à frente e desça o joelho de trás. Volte e alterne as pernas.", tip:"Dica: passo largo para ativar mais o glúteo.", yt:"wrwwXE_x-pQ" },
-      { name:"Afundo reverso c/ anilha",   muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Recue um pé descendo o joelho de trás com anilhas nas mãos. Mais suave para os joelhos que o afundo normal.", tip:"Dica: ótima opção para quem tem dor no joelho.", yt:"D7KaRcUTQeE" },
-      { name:"Passada lateral c/ anilha",  muscle:"Glúteo + Adutores",   icon:"ti-walk", desc:"Com anilha numa mão, dê um passo largo para o lado dobrando o joelho. Alterne os lados a cada repetição.", tip:"Dica: costas retas, joelho não ultrapassa o pé.", yt:"BqnlloV6qMc" },
+      { name:"Afundo com anilhas",      muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Com anilhas nas mãos, dê um passo à frente e desça o joelho de trás. Volte e alterne.", tip:"Dica: passo largo para ativar mais o glúteo.", yt:"QOVaHwm-Q6U" },
+      { name:"Afundo reverso c/ anilha", muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Recue um pé descendo o joelho de trás com anilhas nas mãos. Mais suave para os joelhos.", tip:"Dica: ótima opção para quem tem dor no joelho.", yt:"D7KaRcUTQeE" },
+      { name:"Passada lateral c/ anilha", muscle:"Glúteo + Adutores", icon:"ti-walk", desc:"Com anilha numa mão, dê um passo largo para o lado dobrando o joelho. Alterne os lados.", tip:"Dica: costas retas, joelho não ultrapassa o pé.", yt:"QOVaHwm-Q6U" },
     ]},
     { options: [
-      { name:"Stiff com anilhas",          muscle:"Posterior + Glúteo", icon:"ti-arrow-move-down", desc:"Em pé, anilhas na frente das coxas. Incline o tronco com costas retas sentindo esticar a parte de trás da perna. Suba contraindo o glúteo.", tip:"Dica: joelhos levemente dobrados — não trave.", yt:"oLgd0BUH3to" },
-      { name:"Elevação de quadril c/ anilha", muscle:"Glúteo",         icon:"ti-arrow-badge-up",  desc:"Deitada no tapete, joelhos dobrados, anilha sobre o quadril. Empurre o quadril para cima contraindo o glúteo. Segure 1 segundo.", tip:"Dica: aperte forte o glúteo no topo.", yt:"SEdqd1n0cvg" },
-      { name:"Coice de glúteo 4 apoios",   muscle:"Glúteo",            icon:"ti-arrow-move-down", desc:"De quatro apoios no tapete. Chute uma perna para trás e para cima contraindo o glúteo. Alterne as pernas.", tip:"Dica: não torça a coluna ao elevar a perna.", yt:"tF2pABwCTbk" },
+      { name:"Stiff com anilhas",       muscle:"Posterior + Glúteo", icon:"ti-arrow-move-down", desc:"Em pé, anilhas na frente das coxas. Incline o tronco com costas retas até sentir esticar. Suba contraindo o glúteo.", tip:"Dica: joelhos levemente dobrados.", yt:"oLgd0BUH3to" },
+      { name:"Elevação de quadril",     muscle:"Glúteo",             icon:"ti-arrow-badge-up", desc:"Deitada no tapete, joelhos dobrados, anilha sobre o quadril. Empurre o quadril para cima contraindo o glúteo.", tip:"Dica: aperte forte o glúteo no topo.", yt:"xDmFkJxPzeM" },
+      { name:"Coice de glúteo",         muscle:"Glúteo",             icon:"ti-arrow-move-down", desc:"De quatro apoios no tapete. Chute uma perna para trás e para cima contraindo o glúteo. Alterne.", tip:"Dica: não torça a coluna ao elevar a perna.", yt:"tF2pABwCTbk" },
     ]},
     { options: [
-      { name:"Remada unilateral",          muscle:"Costas",             icon:"ti-arrow-back-up", desc:"Apoio no banquinho com um joelho e uma mão. Puxe a anilha até o quadril mantendo o cotovelo fechado.", tip:"Dica: não gire o tronco ao puxar.", yt:"GZbfZ033f74" },
-      { name:"Remada bilateral inclinada", muscle:"Costas",             icon:"ti-arrow-back-up", desc:"Inclinada para frente, anilhas nas mãos. Puxe os dois cotovelos para trás ao mesmo tempo até as anilhas chegarem na cintura.", tip:"Dica: aperte as escápulas no topo.", yt:"6TSP1TRMUzs" },
-      { name:"Remada no banco invertida",  muscle:"Costas",             icon:"ti-arrow-back-up", desc:"Deitada de barriga para baixo no banquinho, anilhas nas mãos. Puxe os cotovelos para cima contraindo as costas.", tip:"Dica: mantenha o pescoço neutro.", yt:"6TSP1TRMUzs" },
+      { name:"Remada unilateral",       muscle:"Costas",             icon:"ti-arrow-back-up", desc:"Apoio no banco com um joelho e uma mão. Puxe a anilha até o quadril mantendo o cotovelo fechado.", tip:"Dica: não gire o tronco ao puxar.", yt:"GZbfZ033f74" },
+      { name:"Remada bilateral inclinada", muscle:"Costas",          icon:"ti-arrow-back-up", desc:"Inclinada para frente, puxe os dois cotovelos para trás ao mesmo tempo.", tip:"Dica: aperte as escápulas no topo.", yt:"6TSP1TRMUzs" },
+      { name:"Remada no banco invertida", muscle:"Costas",           icon:"ti-arrow-back-up", desc:"Deitada de barriga para baixo no banquinho, anilhas nas mãos. Puxe os cotovelos para cima.", tip:"Dica: mantenha o pescoço neutro.", yt:"6TSP1TRMUzs" },
     ]},
     { options: [
-      { name:"Desenvolvimento com anilhas", muscle:"Ombro completo",   icon:"ti-arrows-up", desc:"Sentada no banquinho, anilhas na altura dos ombros. Empurre para cima até quase juntar. Desça controlado.", tip:"Dica: não trave os cotovelos no topo.", yt:"qEwKCR5JCog" },
-      { name:"Elevação lateral",            muscle:"Ombro lateral",    icon:"ti-arrows-left-right", desc:"Em pé, anilhas nas mãos. Eleve os braços lateralmente até a altura dos ombros com cotovelo levemente dobrado.", tip:"Dica: não use impulso — movimento controlado.", yt:"3VcKaXpzqRo" },
-      { name:"Desenvolvimento Arnold",      muscle:"Ombro completo",   icon:"ti-arrows-up", desc:"Sentada, anilhas na frente com palmas para você. Ao empurrar, gire as palmas para fora. Desça revertendo o giro.", tip:"Dica: ativa todos os feixes do ombro.", yt:"6Z15_WdXmVw" },
+      { name:"Desenvolvimento c/ anilhas", muscle:"Ombro completo",  icon:"ti-arrows-up", desc:"Sentada no banquinho, anilhas na altura dos ombros. Empurre para cima até quase juntar. Desça controlado.", tip:"Dica: não trave os cotovelos no topo.", yt:"wr1W4LMoZW4" },
+      { name:"Elevação lateral",        muscle:"Ombro lateral",      icon:"ti-arrows-left-right", desc:"Em pé, anilhas nas mãos. Eleve lateralmente até a altura dos ombros com cotovelo levemente dobrado.", tip:"Dica: não use impulso — movimento controlado.", yt:"3VcKaXpzqRo" },
+      { name:"Desenvolvimento Arnold",  muscle:"Ombro completo",     icon:"ti-arrows-up", desc:"Anilhas na frente com palmas para você. Ao empurrar, gire as palmas para fora. Desça revertendo.", tip:"Dica: ativa todos os feixes do ombro.", yt:"6Z15_WdXmVw" },
     ]},
     { options: [
-      { name:"Rosca alternada",            muscle:"Bíceps",             icon:"ti-arrow-up", desc:"Em pé, uma anilha em cada mão. Suba uma por vez, girando o punho no topo. Alterne os braços.", tip:"Dica: cotovelo fixo, só o antebraço se move.", yt:"sAq_ocpRh_I" },
-      { name:"Rosca martelo",              muscle:"Bíceps + Antebraço", icon:"ti-arrow-up", desc:"Em pé, anilhas com o polegar para cima (pegada neutra). Suba alternando sem girar o punho. Trabalha parte inferior do bíceps.", tip:"Dica: fortalece também o antebraço.", yt:"zC3nLlEvin4" },
-      { name:"Rosca concentrada",          muscle:"Bíceps",             icon:"ti-arrow-up", desc:"Sentada no banquinho, cotovelo apoiado na coxa interna. Suba a anilha em direção ao ombro e desça.", tip:"Dica: isola muito bem o bíceps.", yt:"ykJmrZ5v0Oo" },
+      { name:"Rosca alternada",         muscle:"Bíceps",             icon:"ti-arrow-up", desc:"Uma anilha em cada mão. Suba uma por vez, girando o punho no topo. Alterne os braços.", tip:"Dica: cotovelo fixo, só o antebraço se move.", yt:"sAq_ocpRh_I" },
+      { name:"Rosca martelo",           muscle:"Bíceps + Antebraço", icon:"ti-arrow-up", desc:"Anilhas com o polegar para cima (pegada neutra). Suba alternando sem girar o punho.", tip:"Dica: trabalha bem a parte inferior do bíceps.", yt:"zC3nLlEvin4" },
+      { name:"Rosca concentrada",       muscle:"Bíceps",             icon:"ti-arrow-up", desc:"Sentada, cotovelo apoiado na coxa interna. Suba devagar, desça com controle.", tip:"Dica: isola muito bem o bíceps.", yt:"Jvj2wV0vOYU" },
     ]},
     { options: [
-      { name:"Tríceps testa",              muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Deitada no tapete, anilha acima da cabeça. Dobre os cotovelos até a anilha quase tocar a testa. Empurre de volta.", tip:"Dica: cotovelos apontando para o teto.", yt:"d_KZxkY_0cM" },
-      { name:"Mergulho no banco",          muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Mãos na borda do banco, pernas estendidas. Desça até os cotovelos formarem 90°. Empurre de volta.", tip:"Dica: quanto mais longe os pés, mais difícil.", yt:"0326dy_-CzM" },
-      { name:"Tríceps coice com anilha",   muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Apoiada no banco, cotovelo dobrado com anilha. Estenda o braço para trás até ficar reto. Volta devagar.", tip:"Dica: cotovelo fixo — só o antebraço se move.", yt:"d_KZxkY_0cM" },
+      { name:"Tríceps testa",           muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Deitada no tapete, anilha acima da cabeça. Dobre os cotovelos até quase tocar a testa. Empurre de volta.", tip:"Dica: cotovelos apontando para o teto.", yt:"yr739FnFiEY" },
+      { name:"Mergulho no banco",       muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Mãos na borda do banco, pernas estendidas. Desça até os cotovelos formarem 90°. Empurre de volta.", tip:"Dica: quanto mais longe os pés, mais difícil.", yt:"0326dy_-CzM" },
+      { name:"Tríceps coice",           muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Apoiada no banco, cotovelo dobrado com anilha. Estenda o braço para trás até ficar reto.", tip:"Dica: cotovelo fixo — só o antebraço se move.", yt:"d_KZxkY_0cM" },
     ]},
     { options: [
-      { name:"Prancha completa",           muscle:"Abdômen + Core",     icon:"ti-minus", desc:"Apoio nas pontas dos pés e antebraços. Corpo reto da cabeça aos calcanhares, barriga contraída. 30 a 40 segundos.", tip:"Dica: não deixe o quadril subir ou cair.", yt:"pSHjTRCQxIw" },
-      { name:"Abdominal bicicleta",        muscle:"Abdômen + Oblíquos", icon:"ti-bike",  desc:"Deitada, mãos atrás da cabeça. Traga o joelho ao cotovelo oposto enquanto estende a outra perna. Alterne.", tip:"Dica: não puxe o pescoço com as mãos.", yt:"9FGilxCbdz8" },
-      { name:"Elevação de pernas",         muscle:"Abdômen inferior",   icon:"ti-minus", desc:"Deitada, mãos ao lado do corpo. Eleve as pernas esticadas até 90° e desça devagar sem encostar no chão.", tip:"Dica: lombar colada no tapete o tempo todo.", yt:"9FGilxCbdz8" },
+      { name:"Prancha completa",        muscle:"Abdômen + Core",     icon:"ti-minus", desc:"Apoio nas pontas dos pés e antebraços. Corpo reto, barriga contraída. 30 a 40 segundos.", tip:"Dica: não deixe o quadril subir ou cair.", yt:"pSHjTRCQxIw" },
+      { name:"Abdominal bicicleta",     muscle:"Abdômen + Oblíquos", icon:"ti-bike",  desc:"Mãos atrás da cabeça. Traga o joelho ao cotovelo oposto enquanto estende a outra perna. Alterne.", tip:"Dica: não puxe o pescoço com as mãos.", yt:"9FGilxCbdz8" },
+      { name:"Elevação de pernas",      muscle:"Abdômen inferior",   icon:"ti-minus", desc:"Deitada, eleve as pernas esticadas até 90° e desça devagar sem encostar no chão.", tip:"Dica: lombar colada no tapete o tempo todo.", yt:"l4kQd9eWclE" },
     ]},
   ],
-  // NÍVEL 3 — Avançado
+  // NÍVEL 3 — Avançado (4 séries x 15 reps)
   [
     { options: [
-      { name:"Agachamento sumô pesado",    muscle:"Glúteo + Adutores",  icon:"ti-arrow-down-circle", desc:"Pés bem abertos, pontas para fora, anilha pendurada entre as pernas. Agache abrindo bem os joelhos.", tip:"Dica: ativa muito a parte interna da coxa.", yt:"BqnlloV6qMc" },
-      { name:"Agachamento goblet pesado",  muscle:"Glúteo + Perna",     icon:"ti-arrow-down-circle", desc:"Anilha maior na frente do peito. Agache fundo, mantendo os calcanhares no chão e o tronco ereto.", tip:"Dica: respire fundo antes de descer.", yt:"MeIiIdhvXT4" },
-      { name:"Agachamento pulsado pesado", muscle:"Glúteo + Quadríceps", icon:"ti-arrow-down-circle", desc:"Agachamento goblet com anilha pesada. No ponto mais baixo, faça 3 pulsos antes de subir.", tip:"Dica: mantém a tensão no glúteo por mais tempo.", yt:"C_VtOYc6j5c" },
+      { name:"Agachamento sumô pesado", muscle:"Glúteo + Adutores",  icon:"ti-arrow-down-circle", desc:"Pés bem abertos, anilha entre as pernas. Agache abrindo bem os joelhos.", tip:"Dica: ativa muito a parte interna da coxa.", yt:"U9_ZBFqBFgE" },
+      { name:"Agachamento goblet pesado", muscle:"Glúteo + Perna",   icon:"ti-arrow-down-circle", desc:"Anilha maior na frente do peito. Agache fundo, calcanhares no chão, tronco ereto.", tip:"Dica: respire fundo antes de descer.", yt:"MeIiIdhvXT4" },
+      { name:"Agachamento pulsado pesado", muscle:"Glúteo + Quadríceps", icon:"ti-arrow-down-circle", desc:"Goblet com anilha pesada. No ponto mais baixo, faça 3 pulsos antes de subir.", tip:"Dica: mantém tensão no glúteo por mais tempo.", yt:"MeIiIdhvXT4" },
     ]},
     { options: [
-      { name:"Hip thrust no banco",        muscle:"Glúteo",             icon:"ti-arrow-badge-up", desc:"Ombros apoiados no banquinho, pés no chão, anilha sobre o quadril. Empurre alto contraindo o glúteo. 1 segundo no topo.", tip:"Dica: pés na largura do quadril, joelhos a 90°.", yt:"SEdqd1n0cvg" },
-      { name:"Hip thrust unilateral",      muscle:"Glúteo",             icon:"ti-arrow-badge-up", desc:"Igual ao hip thrust, mas com uma perna esticada no ar. Toda a força vem de um glúteo só.", tip:"Dica: mais difícil — comece sem anilha.", yt:"SEdqd1n0cvg" },
-      { name:"Hip thrust pulsado",         muscle:"Glúteo",             icon:"ti-arrow-badge-up", desc:"No topo do hip thrust, faça 3 pulsos pequenos antes de descer. Mantém contração máxima no glúteo.", tip:"Dica: não deixe o quadril cair completamente entre os pulsos.", yt:"SEdqd1n0cvg" },
+      { name:"Hip thrust no banco",     muscle:"Glúteo",             icon:"ti-arrow-badge-up", desc:"Ombros apoiados no banquinho, anilha sobre o quadril. Empurre alto contraindo o glúteo. 1 segundo no topo.", tip:"Dica: pés na largura do quadril, joelhos a 90°.", yt:"xDmFkJxPzeM" },
+      { name:"Hip thrust unilateral",   muscle:"Glúteo",             icon:"ti-arrow-badge-up", desc:"Igual ao hip thrust, mas com uma perna esticada no ar. Toda a força vem de um glúteo só.", tip:"Dica: mais difícil — comece sem anilha.", yt:"xDmFkJxPzeM" },
+      { name:"Hip thrust pulsado",      muscle:"Glúteo",             icon:"ti-arrow-badge-up", desc:"No topo do hip thrust, faça 3 pulsos pequenos antes de descer. Mantém contração máxima.", tip:"Dica: não deixe o quadril cair completamente.", yt:"xDmFkJxPzeM" },
     ]},
     { options: [
-      { name:"Afundo com passada",         muscle:"Glúteo + Perna",     icon:"ti-walk", desc:"Caminhe dando passadas longas alternando as pernas, com anilhas nas mãos.", tip:"Dica: tronco ereto, olho para frente.", yt:"wrwwXE_x-pQ" },
-      { name:"Step-up no banco",           muscle:"Glúteo + Perna",     icon:"ti-walk", desc:"Suba com um pé no banquinho, empurre com o calcanhar para elevar o corpo. Desça. Alterne as pernas.", tip:"Dica: não use a perna de baixo para empurrar.", yt:"gVFaIqgHVNA" },
-      { name:"Afundo reverso c/ anilha",   muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Recue um pé descendo o joelho de trás com anilhas pesadas. Mais suave para o joelho.", tip:"Dica: passo largo ativa mais o glúteo.", yt:"D7KaRcUTQeE" },
+      { name:"Afundo com passada",      muscle:"Glúteo + Perna",     icon:"ti-walk", desc:"Caminhe dando passadas longas alternando as pernas, com anilhas nas mãos.", tip:"Dica: tronco ereto, olho para frente.", yt:"QOVaHwm-Q6U" },
+      { name:"Step-up no banco",        muscle:"Glúteo + Perna",     icon:"ti-walk", desc:"Suba com um pé no banquinho, empurre com o calcanhar para elevar o corpo. Desça. Alterne.", tip:"Dica: não use a perna de baixo para empurrar.", yt:"dQqIU2hNZTM" },
+      { name:"Stiff com anilhas pesado", muscle:"Posterior + Glúteo", icon:"ti-arrow-move-down", desc:"Em pé, anilhas na frente das coxas. Incline o tronco com costas retas. Suba contraindo o glúteo.", tip:"Dica: joelhos levemente dobrados.", yt:"oLgd0BUH3to" },
     ]},
     { options: [
-      { name:"Flexão completa",            muscle:"Peito + Tríceps",    icon:"ti-arrows-down-up", desc:"Apoio nas pontas dos pés e mãos. Desça o peito até quase tocar o chão. Empurre de volta. Corpo reto.", tip:"Dica: se difícil, alterne com flexão de joelho.", yt:"IODxDxX7oi4" },
-      { name:"Flexão pegada larga",        muscle:"Peito externo",      icon:"ti-arrows-down-up", desc:"Mãos mais abertas que o normal. Ativa mais o peitoral externo e os ombros.", tip:"Dica: cotovelos abrem mais para os lados.", yt:"IODxDxX7oi4" },
-      { name:"Flexão arquejada",         muscle:"Peito + Core",       icon:"ti-arrows-down-up", desc:"Na posição de flexão, quadril ligeiramente acima. Desça puxando o peito para frente e para baixo.", tip:"Dica: parecido com o movimento de cobra do yoga.", yt:"IODxDxX7oi4" },
+      { name:"Flexão completa",         muscle:"Peito + Tríceps",    icon:"ti-arrows-down-up", desc:"Apoio nas pontas dos pés e mãos. Desça o peito até quase tocar o chão. Empurre de volta.", tip:"Dica: corpo reto da cabeça aos calcanhares.", yt:"IODxDxX7oi4" },
+      { name:"Flexão pegada larga",     muscle:"Peito externo",      icon:"ti-arrows-down-up", desc:"Mãos mais abertas que o normal. Ativa mais o peitoral externo.", tip:"Dica: cotovelos abrem mais para os lados.", yt:"IODxDxX7oi4" },
+      { name:"Flexão diamante",         muscle:"Tríceps + Peito",    icon:"ti-arrows-down-up", desc:"Mãos formando triângulo no chão. Desça o peito até quase tocar. Ativa muito o tríceps.", tip:"Dica: cotovelos fechados durante todo o movimento.", yt:"J0DnG1_S92I" },
     ]},
     { options: [
-      { name:"Remada invertida no banco",muscle:"Costas",             icon:"ti-arrow-back-up", desc:"Deitada de barriga para baixo no banquinho, anilhas nas mãos. Puxe os cotovelos para cima contraindo as costas.", tip:"Dica: mantenha o pescoço neutro.", gif:"https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" },
-      { name:"Remada dois braços",       muscle:"Costas + Bíceps",    icon:"ti-arrow-back-up", desc:"Inclinada para frente, puxe os dois cotovelos para trás ao mesmo tempo. Aperte as escápulas no topo.", tip:"Dica: costas retas, não arredonde.", yt:"6TSP1TRMUzs" },
-      { name:"Remada unilateral pesada", muscle:"Costas",             icon:"ti-arrow-back-up", desc:"Com anilha mais pesada, puxe o cotovelo bem alto. Foco em contrair as costas, não o bíceps.", tip:"Dica: gire levemente o tronco para puxar mais alto.", yt:"GZbfZ033f74" },
+      { name:"Remada unilateral pesada", muscle:"Costas",            icon:"ti-arrow-back-up", desc:"Anilha mais pesada, apoio no banco. Puxe bem alto o cotovelo. Foco nas costas.", tip:"Dica: rotação leve do tronco permite puxar mais alto.", yt:"GZbfZ033f74" },
+      { name:"Remada bilateral pesada", muscle:"Costas",             icon:"ti-arrow-back-up", desc:"Inclinada, puxe os dois cotovelos para trás com anilhas pesadas. Aperte as escápulas.", tip:"Dica: não arredonde as costas.", yt:"6TSP1TRMUzs" },
+      { name:"Remada no banco invertida", muscle:"Costas",           icon:"ti-arrow-back-up", desc:"Barriga para baixo no banquinho, anilhas nas mãos. Puxe os cotovelos para cima.", tip:"Dica: quanto mais alto você puxa, mais costas trabalha.", yt:"6TSP1TRMUzs" },
     ]},
     { options: [
-      { name:"Rosca martelo",            muscle:"Bíceps + Antebraço", icon:"ti-arrow-up", desc:"Anilhas com polegar para cima. Suba alternando sem girar o punho.", tip:"Dica: trabalha a parte inferior do bíceps.", yt:"zC3nLlEvin4" },
-      { name:"Rosca 21",                 muscle:"Bíceps",             icon:"ti-arrow-up", desc:"7 reps da parte baixa (0–90°), 7 da parte alta (90° acima), 7 completas. Total = 21.", tip:"Dica: use peso menor — é mais pesado que parece!", yt:"ykJmrZ5v0Oo" },
-      { name:"Rosca inversa",            muscle:"Bíceps + Antebraço", icon:"ti-arrow-up", desc:"Anilhas com pegada pronada (palma para baixo). Suba e desça controlado.", tip:"Dica: fortalece muito o antebraço.", gif:"https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" },
+      { name:"Rosca martelo",           muscle:"Bíceps + Antebraço", icon:"ti-arrow-up", desc:"Anilhas com polegar para cima. Suba alternando sem girar o punho. Trabalha a parte inferior do bíceps.", tip:"Dica: fortalece também o antebraço.", yt:"zC3nLlEvin4" },
+      { name:"Rosca 21",                muscle:"Bíceps",             icon:"ti-arrow-up", desc:"7 reps baixas (0–90°), 7 reps altas (90° acima), 7 reps completas. Total = 21.", tip:"Dica: use peso menor — é mais pesado que parece!", yt:"ykJmrZ5v0Oo" },
+      { name:"Rosca inversa",           muscle:"Bíceps + Antebraço", icon:"ti-arrow-up", desc:"Pegada pronada (palma para baixo). Suba e desça controlado. Fortalece muito o antebraço.", tip:"Dica: mantenha os cotovelos fixos.", yt:"sAq_ocpRh_I" },
     ]},
     { options: [
-      { name:"Mergulho no banco",        muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Mãos na borda do banco, pernas estendidas. Desça até os cotovelos formarem 90°. Empurre de volta.", tip:"Dica: quanto mais longe os pés, mais difícil.", yt:"0326dy_-CzM" },
-      { name:"Flexão diamante",          muscle:"Tríceps + Peito",    icon:"ti-arrows-down-up", desc:"Mãos formando um triângulo no chão. Desça o peito até quase tocar as mãos. Empurre de volta.", tip:"Dica: ativa muito mais o tríceps.", yt:"J0DnG1_S92I" },
-      { name:"Tríceps testa pesado",      muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Deitada no tapete, anilha mais pesada. Dobre os cotovelos até a anilha quase tocar a testa e empurre.", tip:"Dica: cotovelos apontam para o teto — não abram.", yt:"d_KZxkY_0cM" },
+      { name:"Mergulho no banco pesado", muscle:"Tríceps",           icon:"ti-arrow-down", desc:"Mãos na borda do banco, pernas bem estendidas. Desça fundo, empurre de volta.", tip:"Dica: quanto mais longe os pés, mais difícil.", yt:"0326dy_-CzM" },
+      { name:"Flexão diamante",         muscle:"Tríceps + Peito",    icon:"ti-arrows-down-up", desc:"Mãos formando triângulo no chão. Ativa muito mais o tríceps que a flexão normal.", tip:"Dica: cotovelos fechados durante todo o movimento.", yt:"J0DnG1_S92I" },
+      { name:"Tríceps testa pesado",    muscle:"Tríceps",            icon:"ti-arrow-down", desc:"Deitada, anilha mais pesada. Dobre os cotovelos até quase tocar a testa e empurre.", tip:"Dica: cotovelos apontam para o teto — não abram.", yt:"yr739FnFiEY" },
     ]},
     { options: [
-      { name:"Abdominal bicicleta",        muscle:"Abdômen + Oblíquos", icon:"ti-bike",  desc:"Deitada, mãos atrás da cabeça. Traga joelho ao cotovelo oposto enquanto estende a outra perna. Alterne devagar.", tip:"Dica: não puxe o pescoço.", yt:"9FGilxCbdz8" },
-      { name:"Prancha lateral",            muscle:"Oblíquos + Core",    icon:"ti-minus", desc:"Apoio no antebraço e na lateral do pé. Corpo alinhado. Segure 20–30 segundos por lado.", tip:"Dica: quadril não cai nem sobe — linha reta.", yt:"pSHjTRCQxIw" },
-      { name:"Russian twist",              muscle:"Oblíquos",           icon:"ti-minus", desc:"Sentada, tronco inclinado, pernas elevadas. Gire o tronco de um lado para o outro segurando uma anilha.", tip:"Dica: o movimento vem do tronco, não dos braços.", yt:"9FGilxCbdz8" },
+      { name:"Abdominal bicicleta",     muscle:"Abdômen + Oblíquos", icon:"ti-bike",  desc:"Mãos atrás da cabeça. Traga joelho ao cotovelo oposto. Alterne devagar e com controle.", tip:"Dica: não puxe o pescoço.", yt:"9FGilxCbdz8" },
+      { name:"Prancha lateral",         muscle:"Oblíquos + Core",    icon:"ti-minus", desc:"Apoio no antebraço e na lateral do pé. Corpo alinhado. Segure 20–30 segundos por lado.", tip:"Dica: quadril não cai nem sobe — linha reta.", yt:"pSHjTRCQxIw" },
+      { name:"Russian twist",           muscle:"Oblíquos",           icon:"ti-minus", desc:"Sentada, tronco inclinado, pernas elevadas. Gire o tronco de um lado para o outro com anilha.", tip:"Dica: o movimento vem do tronco, não dos braços.", yt:"Xyd_fa5zoEU" },
     ]},
   ],
-  // NÍVEL 4 — Expert
+  // NÍVEL 4 — Expert (5 séries x 15 reps)
   [
     { options: [
-      { name:"Agachamento búlgaro",        muscle:"Glúteo + Quadríceps", icon:"ti-arrow-down-circle", desc:"Um pé atrás apoiado no banco, outro à frente. Desça o joelho de trás ao chão. Suba empurrando o calcanhar da frente.", tip:"Dica: exercício intenso — comece sem peso.", yt:"2C-uNgKwPLE" },
-      { name:"Agachamento búlgaro pesado", muscle:"Glúteo + Quadríceps", icon:"ti-arrow-down-circle", desc:"Igual ao búlgaro, mas com anilhas nas mãos. Foco em descer bem fundo e subir com potência.", tip:"Dica: use espelho ou filmagem para checar a postura.", yt:"2C-uNgKwPLE" },
-      { name:"Pistol squat assistido",     muscle:"Glúteo + Equilíbrio", icon:"ti-arrow-down-circle", desc:"Agachamento em uma perna só, com apoio leve na parede ou banco. A perna livre fica estendida à frente.", tip:"Dica: um dos exercícios mais difíceis do body weight.", yt:"vq5-vdgJc0I" },
+      { name:"Agachamento búlgaro",     muscle:"Glúteo + Quadríceps", icon:"ti-arrow-down-circle", desc:"Um pé atrás apoiado no banco, outro à frente. Desça o joelho de trás ao chão. Suba com o calcanhar.", tip:"Dica: exercício intenso — comece sem peso.", yt:"l9pulBM_viw" },
+      { name:"Agachamento búlgaro pesado", muscle:"Glúteo + Quadríceps", icon:"ti-arrow-down-circle", desc:"Igual ao búlgaro, mas com anilhas nas mãos. Desça fundo e suba com potência.", tip:"Dica: use espelho para checar a postura.", yt:"l9pulBM_viw" },
+      { name:"Pistol squat assistido",  muscle:"Glúteo + Equilíbrio", icon:"ti-arrow-down-circle", desc:"Agachamento em uma perna só, com apoio leve na parede. A perna livre fica estendida à frente.", tip:"Dica: um dos exercícios mais difíceis do body weight.", yt:"qECKVBt4lBk" },
     ]},
     { options: [
-      { name:"Hip thrust pesado",          muscle:"Glúteo",              icon:"ti-arrow-badge-up", desc:"Ombros no banco, anilha pesada sobre o quadril. Empurre alto contraindo forte. 1 segundo no topo.", tip:"Dica: pés na largura do quadril, joelhos a 90°.", yt:"SEdqd1n0cvg" },
-      { name:"Hip thrust unilateral pesado",muscle:"Glúteo",             icon:"ti-arrow-badge-up", desc:"Uma perna esticada, anilha pesada sobre o quadril. Toda a força de um glúteo só.", tip:"Dica: mais desafiador — controla bem antes de adicionar peso.", yt:"SEdqd1n0cvg" },
-      { name:"Hip thrust pulsado pesado",  muscle:"Glúteo",              icon:"ti-arrow-badge-up", desc:"Hip thrust com anilha pesada. 3 pulsos no topo antes de descer. Máxima tensão no glúteo.", tip:"Dica: você vai sentir queimar — é normal!", yt:"SEdqd1n0cvg" },
+      { name:"Hip thrust pesado",       muscle:"Glúteo",             icon:"ti-arrow-badge-up", desc:"Ombros no banco, anilha pesada sobre o quadril. Empurre alto contraindo forte. 1 segundo no topo.", tip:"Dica: pés na largura do quadril, joelhos a 90°.", yt:"xDmFkJxPzeM" },
+      { name:"Hip thrust unilateral pesado", muscle:"Glúteo",        icon:"ti-arrow-badge-up", desc:"Uma perna esticada, anilha pesada sobre o quadril. Toda a força de um glúteo só.", tip:"Dica: controla bem antes de adicionar peso.", yt:"xDmFkJxPzeM" },
+      { name:"Hip thrust pulsado pesado", muscle:"Glúteo",           icon:"ti-arrow-badge-up", desc:"Hip thrust com anilha pesada. 3 pulsos no topo antes de descer. Máxima tensão.", tip:"Dica: você vai sentir queimar — é normal!", yt:"xDmFkJxPzeM" },
     ]},
     { options: [
-      { name:"Stiff unilateral",           muscle:"Posterior + Glúteo",  icon:"ti-arrow-move-down", desc:"Em um só pé, incline o tronco levando a anilha para baixo enquanto a outra perna sobe atrás. Controle total.", tip:"Dica: olhe para um ponto fixo no chão.", yt:"oLgd0BUH3to" },
-      { name:"Step-up pesado no banco",    muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Sobe no banco com anilhas pesadas. Empurre com o calcanhar. Desça controlado.", tip:"Dica: não use o joelho de baixo para ajudar.", yt:"gVFaIqgHVNA" },
-      { name:"Afundo búlgaro com anilha",  muscle:"Glúteo + Perna",      icon:"ti-walk", desc:"Afundo com o pé de trás no banco e anilhas pesadas nas mãos. Máxima ativação do glúteo.", tip:"Dica: combine com hip thrust para o treino definitivo.", yt:"2C-uNgKwPLE" },
+      { name:"Stiff unilateral",        muscle:"Posterior + Glúteo", icon:"ti-arrow-move-down", desc:"Em um só pé, incline o tronco levando a anilha para baixo enquanto a outra perna sobe atrás.", tip:"Dica: olhe para um ponto fixo no chão.", yt:"oLgd0BUH3to" },
+      { name:"Step-up pesado",          muscle:"Glúteo + Quadríceps", icon:"ti-walk", desc:"Sobe no banco com anilhas pesadas. Empurre com o calcanhar. Desça controlado.", tip:"Dica: não use o joelho de baixo para ajudar.", yt:"dQqIU2hNZTM" },
+      { name:"Afundo búlgaro c/ anilha", muscle:"Glúteo + Perna",   icon:"ti-walk", desc:"Afundo com o pé de trás no banco e anilhas pesadas. Máxima ativação do glúteo.", tip:"Dica: combine com hip thrust para o treino definitivo.", yt:"l9pulBM_viw" },
     ]},
     { options: [
-      { name:"Flexão diamante",            muscle:"Tríceps + Peito",     icon:"ti-arrows-down-up", desc:"Mãos formando triângulo no chão. Desça o peito até quase tocar. Empurre de volta. Ativa muito o tríceps.", tip:"Dica: cotovelos fechados durante todo o movimento.", yt:"J0DnG1_S92I" },
-      { name:"Flexão Pike",                muscle:"Ombro + Tríceps",     icon:"ti-arrows-down-up", desc:"Quadril alto formando um V invertido. Dobre os cotovelos descendo a cabeça em direção ao chão. Ativa o ombro.", tip:"Dica: ativa mais o ombro que a flexão normal.", yt:"IODxDxX7oi4" },
-      { name:"Flexão explosiva",           muscle:"Peito + Potência",    icon:"ti-arrows-down-up", desc:"Flexão normal, mas no empurrão suba com força deixando as mãos saírem do chão por um instante. Trabalha explosão.", tip:"Dica: Amorteça bem o impacto ao pousar.", yt:"IODxDxX7oi4" },
+      { name:"Flexão diamante",         muscle:"Tríceps + Peito",    icon:"ti-arrows-down-up", desc:"Mãos formando triângulo no chão. Desça o peito até quase tocar. Empurre de volta.", tip:"Dica: cotovelos fechados durante todo o movimento.", yt:"J0DnG1_S92I" },
+      { name:"Flexão Pike",             muscle:"Ombro + Tríceps",    icon:"ti-arrows-down-up", desc:"Quadril alto formando um V invertido. Dobre os cotovelos descendo a cabeça em direção ao chão.", tip:"Dica: ativa mais o ombro que a flexão normal.", yt:"jWxvty2KROs" },
+      { name:"Flexão explosiva",        muscle:"Peito + Potência",   icon:"ti-arrows-down-up", desc:"Flexão normal, mas no empurrão suba com força deixando as mãos saírem do chão. Trabalha explosão.", tip:"Dica: amorteça bem o impacto ao pousar.", yt:"IODxDxX7oi4" },
     ]},
     { options: [
-      { name:"Desenvolvimento Arnold",     muscle:"Ombro completo",      icon:"ti-arrows-up", desc:"Sentada, anilhas na frente com palmas para você. Ao empurrar, gire as palmas para fora. Desça revertendo.", tip:"Dica: ativa todos os feixes do ombro.", yt:"6Z15_WdXmVw" },
-      { name:"Desenvolvimento pesado",     muscle:"Ombro completo",      icon:"ti-arrows-up", desc:"Sentada no banco, anilhas mais pesadas. Empurre para cima com força, desça com controle total.", tip:"Dica: mantenha o core contraído durante todo o movimento.", yt:"qEwKCR5JCog" },
-      { name:"Elevação lateral pesada",    muscle:"Ombro lateral",       icon:"ti-arrows-left-right", desc:"Anilhas pesadas. Eleve lateralmente com controle — não use impulso do corpo. Pause no topo.", tip:"Dica: pause 1 segundo no topo para maximizar a contração.", yt:"3VcKaXpzqRo" },
+      { name:"Desenvolvimento Arnold",  muscle:"Ombro completo",     icon:"ti-arrows-up", desc:"Anilhas na frente com palmas para você. Ao empurrar, gire as palmas para fora. Desça revertendo.", tip:"Dica: ativa todos os feixes do ombro.", yt:"6Z15_WdXmVw" },
+      { name:"Desenvolvimento pesado",  muscle:"Ombro completo",     icon:"ti-arrows-up", desc:"Anilhas pesadas na altura dos ombros. Empurre para cima com força, desça com controle total.", tip:"Dica: mantenha o core contraído durante todo o movimento.", yt:"wr1W4LMoZW4" },
+      { name:"Elevação lateral pesada", muscle:"Ombro lateral",      icon:"ti-arrows-left-right", desc:"Anilhas pesadas. Eleve lateralmente com controle — não use impulso. Pause 1 segundo no topo.", tip:"Dica: pausa no topo maximiza a contração.", yt:"3VcKaXpzqRo" },
     ]},
     { options: [
-      { name:"Remada bilateral pesada",    muscle:"Costas + Bíceps",     icon:"ti-arrow-back-up", desc:"Inclinada, puxe os dois cotovelos para trás com anilhas pesadas. Aperte bem as escápulas.", tip:"Dica: não arredonde as costas.", yt:"6TSP1TRMUzs" },
-      { name:"Remada unilateral pesada",   muscle:"Costas",              icon:"ti-arrow-back-up", desc:"Anilha pesada, apoio no banco. Puxe bem alto o cotovelo. Foco nas costas, não no bíceps.", tip:"Dica: rotação leve do tronco permite puxar mais alto.", yt:"GZbfZ033f74" },
-      { name:"Remada invertida pesada",    muscle:"Costas",              icon:"ti-arrow-back-up", desc:"Barriga para baixo no banco. Anilhas pesadas. Puxe os cotovelos bem acima da linha do banco.", tip:"Dica: quanto mais alto você puxa, mais costas trabalha.", yt:"6TSP1TRMUzs" },
+      { name:"Remada bilateral pesada", muscle:"Costas + Bíceps",    icon:"ti-arrow-back-up", desc:"Inclinada, puxe os dois cotovelos para trás com anilhas pesadas. Aperte bem as escápulas.", tip:"Dica: não arredonde as costas.", yt:"6TSP1TRMUzs" },
+      { name:"Remada unilateral pesada", muscle:"Costas",            icon:"ti-arrow-back-up", desc:"Anilha pesada, apoio no banco. Puxe bem alto o cotovelo. Foco nas costas, não no bíceps.", tip:"Dica: rotação leve do tronco permite puxar mais alto.", yt:"GZbfZ033f74" },
+      { name:"Remada invertida pesada", muscle:"Costas",             icon:"ti-arrow-back-up", desc:"Barriga para baixo no banco. Anilhas pesadas. Puxe os cotovelos bem acima da linha do banco.", tip:"Dica: quanto mais alto você puxa, mais costas trabalha.", yt:"6TSP1TRMUzs" },
     ]},
     { options: [
-      { name:"Rosca 21",                   muscle:"Bíceps",              icon:"ti-arrow-up", desc:"7 reps baixas (da cintura ao meio), 7 reps altas (do meio ao ombro), 7 reps completas. Total = 21 por série.", tip:"Dica: use peso menor — parece simples mas não é!", yt:"ykJmrZ5v0Oo" },
-      { name:"Rosca concentrada pesada",   muscle:"Bíceps",              icon:"ti-arrow-up", desc:"Sentada, cotovelo na coxa. Anilha pesada. Suba devagar, desça ainda mais devagar.", tip:"Dica: a fase de descida (excêntrica) é a mais importante.", yt:"ykJmrZ5v0Oo" },
-      { name:"Rosca martelo pesada",       muscle:"Bíceps + Antebraço",  icon:"ti-arrow-up", desc:"Pegada neutra (polegar para cima) com anilha pesada. Sobe e desce com controle total. Fortalece o antebraço.", tip:"Dica: não gire o punho — mantém neutro o tempo todo.", yt:"zC3nLlEvin4" },
+      { name:"Rosca 21",                muscle:"Bíceps",             icon:"ti-arrow-up", desc:"7 reps baixas (0–90°), 7 reps altas (90° acima), 7 reps completas. Total = 21 por série.", tip:"Dica: use peso menor — parece simples mas não é!", yt:"ykJmrZ5v0Oo" },
+      { name:"Rosca concentrada pesada", muscle:"Bíceps",            icon:"ti-arrow-up", desc:"Cotovelo na coxa, anilha pesada. Suba devagar, desça ainda mais devagar.", tip:"Dica: a fase de descida (excêntrica) é a mais importante.", yt:"Jvj2wV0vOYU" },
+      { name:"Rosca martelo pesada",    muscle:"Bíceps + Antebraço", icon:"ti-arrow-up", desc:"Pegada neutra (polegar para cima) com anilha pesada. Sobe e desce com controle total.", tip:"Dica: não gire o punho — mantém neutro o tempo todo.", yt:"zC3nLlEvin4" },
     ]},
     { options: [
-      { name:"Prancha com elevação de perna", muscle:"Glúteo + Core",   icon:"ti-minus", desc:"Na prancha completa, eleve uma perna contraindo o glúteo. Segure 2 segundos e alterne.", tip:"Dica: não deixe o quadril girar ao elevar.", yt:"pSHjTRCQxIw" },
-      { name:"Ab wheel (sem roda)",        muscle:"Core completo",       icon:"ti-minus", desc:"De quatro apoios, deslize as mãos para frente no tapete o máximo que conseguir. Volta contraindo o abdômen.", tip:"Dica: mantenha o core rígido — não afunde a lombar.", yt:"pSHjTRCQxIw" },
-      { name:"Dragon flag assistido",      muscle:"Core completo",       icon:"ti-minus", desc:"Deitada no banco, segure atrás da cabeça. Eleve o corpo em linha reta a partir dos ombros. Desça lento.", tip:"Dica: um dos abdominais mais difíceis que existem!", yt:"9FGilxCbdz8" },
+      { name:"Prancha c/ elevação de perna", muscle:"Glúteo + Core", icon:"ti-minus", desc:"Na prancha completa, eleve uma perna contraindo o glúteo. Segure 2 segundos e alterne.", tip:"Dica: não deixe o quadril girar ao elevar.", yt:"pSHjTRCQxIw" },
+      { name:"Ab wheel (sem roda)",     muscle:"Core completo",      icon:"ti-minus", desc:"De quatro apoios, deslize as mãos para frente no tapete o máximo que conseguir. Volta contraindo o abdômen.", tip:"Dica: mantenha o core rígido — não afunde a lombar.", yt:"pSHjTRCQxIw" },
+      { name:"Dragon flag assistido",   muscle:"Core completo",      icon:"ti-minus", desc:"Deitada no banco, segure atrás da cabeça. Eleve o corpo em linha reta a partir dos ombros. Desça lento.", tip:"Dica: um dos abdominais mais difíceis que existem!", yt:"9FGilxCbdz8" },
     ]},
   ],
 ];
-
 // Session persistence: save mid-workout state for same-day resume
 function saveSession() {
   if (st.t0 === null) return;
@@ -685,7 +685,7 @@ const MUSCLE_SVG = {
     <ellipse cx="55" cy="62" rx="18" ry="24" fill="#1D9E75" opacity="0.85"/>
     <rect x="28" y="90" width="14" ry="6" height="36" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <rect x="48" y="90" width="14" ry="6" height="36" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="120" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Glúteo</text>
+    <text x="45" y="120" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Glúteo</text>
   </svg>`,
   'Glúteo + Perna': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="50" rx="30" ry="38" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -693,7 +693,7 @@ const MUSCLE_SVG = {
     <ellipse cx="55" cy="58" rx="16" ry="22" fill="#1D9E75" opacity="0.85"/>
     <rect x="28" y="84" width="14" ry="5" height="38" fill="#1D9E75" opacity="0.7"/>
     <rect x="48" y="84" width="14" ry="5" height="38" fill="#1D9E75" opacity="0.7"/>
-    <text x="45" y="128" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Glúteo + Perna</text>
+    <text x="45" y="128" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Glúteo + Perna</text>
   </svg>`,
   'Glúteo + Quadríceps': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="50" rx="30" ry="38" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -701,7 +701,7 @@ const MUSCLE_SVG = {
     <ellipse cx="55" cy="56" rx="16" ry="22" fill="#1D9E75" opacity="0.8"/>
     <rect x="28" y="82" width="14" ry="5" height="38" fill="#5DCAA5" opacity="0.85"/>
     <rect x="48" y="82" width="14" ry="5" height="38" fill="#5DCAA5" opacity="0.85"/>
-    <text x="45" y="128" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Glúteo + Quad</text>
+    <text x="45" y="128" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Glúteo + Quad</text>
   </svg>`,
   'Glúteo + Adutores': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="50" rx="32" ry="38" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -710,7 +710,7 @@ const MUSCLE_SVG = {
     <ellipse cx="44" cy="72" rx="8" ry="16" fill="#0F6E56" opacity="0.7"/>
     <rect x="28" y="86" width="14" ry="5" height="36" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <rect x="48" y="86" width="14" ry="5" height="36" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="128" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Glúteo + Adut.</text>
+    <text x="45" y="128" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Glúteo + Adut.</text>
   </svg>`,
   'Posterior + Glúteo': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="50" rx="30" ry="36" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -718,7 +718,7 @@ const MUSCLE_SVG = {
     <ellipse cx="54" cy="56" rx="14" ry="20" fill="#1D9E75" opacity="0.7"/>
     <rect x="29" y="82" width="13" ry="5" height="38" fill="#1D9E75" opacity="0.85"/>
     <rect x="48" y="82" width="13" ry="5" height="38" fill="#1D9E75" opacity="0.85"/>
-    <text x="45" y="128" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Post. + Glúteo</text>
+    <text x="45" y="128" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Post. + Glúteo</text>
   </svg>`,
   'Panturrilha': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="42" rx="28" ry="34" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -726,7 +726,7 @@ const MUSCLE_SVG = {
     <rect x="48" y="76" width="13" ry="5" height="20" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <ellipse cx="36" cy="108" rx="10" ry="16" fill="#1D9E75" opacity="0.85"/>
     <ellipse cx="54" cy="108" rx="10" ry="16" fill="#1D9E75" opacity="0.85"/>
-    <text x="45" y="128" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Panturrilha</text>
+    <text x="45" y="128" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Panturrilha</text>
   </svg>`,
   'Peito + Tríceps': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="38" rx="36" ry="10" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -735,7 +735,7 @@ const MUSCLE_SVG = {
     <rect x="12" y="60" width="10" ry="4" height="30" fill="#5DCAA5" opacity="0.7"/>
     <rect x="68" y="60" width="10" ry="4" height="30" fill="#5DCAA5" opacity="0.7"/>
     <rect x="30" y="65" width="30" ry="4" height="50" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="122" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Peito + Tríceps</text>
+    <text x="45" y="122" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Peito + Tríceps</text>
   </svg>`,
   'Costas': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="38" rx="36" ry="10" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -743,7 +743,7 @@ const MUSCLE_SVG = {
     <rect x="12" y="55" width="10" ry="4" height="28" fill="#5DCAA5" opacity="0.6"/>
     <rect x="68" y="55" width="10" ry="4" height="28" fill="#5DCAA5" opacity="0.6"/>
     <rect x="30" y="94" width="30" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="128" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Costas</text>
+    <text x="45" y="128" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Costas</text>
   </svg>`,
   'Costas + Bíceps': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="38" rx="36" ry="10" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -751,14 +751,14 @@ const MUSCLE_SVG = {
     <rect x="12" y="55" width="10" ry="4" height="28" fill="#1D9E75" opacity="0.85"/>
     <rect x="68" y="55" width="10" ry="4" height="28" fill="#1D9E75" opacity="0.85"/>
     <rect x="30" y="94" width="30" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="128" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Costas + Bíceps</text>
+    <text x="45" y="128" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Costas + Bíceps</text>
   </svg>`,
   'Lombar + Costas': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="38" rx="36" ry="10" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <path d="M22 50 Q45 65 68 50 Q68 82 45 88 Q22 82 22 50Z" fill="#5DCAA5" opacity="0.5"/>
     <rect x="38" y="65" width="14" ry="4" height="30" fill="#1D9E75" opacity="0.85"/>
     <rect x="30" y="94" width="30" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="128" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Lombar</text>
+    <text x="45" y="128" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Lombar</text>
   </svg>`,
   'Ombro': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="38" rx="34" ry="9" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -767,21 +767,21 @@ const MUSCLE_SVG = {
     <rect x="29" y="47" width="32" ry="4" height="42" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <rect x="12" y="62" width="10" ry="4" height="30" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <rect x="68" y="62" width="10" ry="4" height="30" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="120" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Ombro</text>
+    <text x="45" y="120" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Ombro</text>
   </svg>`,
   'Ombro anterior': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="38" rx="34" ry="9" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <ellipse cx="18" cy="48" rx="12" ry="12" fill="#EF9F27" opacity="0.9"/>
     <ellipse cx="72" cy="48" rx="12" ry="12" fill="#EF9F27" opacity="0.9"/>
     <rect x="29" y="47" width="32" ry="4" height="42" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="120" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Ombro anterior</text>
+    <text x="45" y="120" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Ombro anterior</text>
   </svg>`,
   'Ombro lateral': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="38" rx="34" ry="9" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <ellipse cx="18" cy="50" rx="13" ry="13" fill="#EF9F27" opacity="0.9"/>
     <ellipse cx="72" cy="50" rx="13" ry="13" fill="#EF9F27" opacity="0.9"/>
     <rect x="29" y="47" width="32" ry="4" height="42" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="120" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Ombro lateral</text>
+    <text x="45" y="120" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Ombro lateral</text>
   </svg>`,
   'Ombro completo': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="38" rx="34" ry="9" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -790,7 +790,7 @@ const MUSCLE_SVG = {
     <rect x="29" y="47" width="32" ry="4" height="42" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <rect x="12" y="63" width="10" ry="4" height="26" fill="#EF9F27" opacity="0.5"/>
     <rect x="68" y="63" width="10" ry="4" height="26" fill="#EF9F27" opacity="0.5"/>
-    <text x="45" y="122" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Ombro completo</text>
+    <text x="45" y="122" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Ombro completo</text>
   </svg>`,
   'Bíceps': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -799,7 +799,7 @@ const MUSCLE_SVG = {
     <ellipse cx="68" cy="55" rx="12" ry="20" fill="#1D9E75" opacity="0.85"/>
     <rect x="12" y="74" width="10" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <rect x="68" y="74" width="10" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="118" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Bíceps</text>
+    <text x="45" y="118" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Bíceps</text>
   </svg>`,
   'Bíceps + Antebraço': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -808,7 +808,7 @@ const MUSCLE_SVG = {
     <ellipse cx="68" cy="54" rx="12" ry="20" fill="#1D9E75" opacity="0.85"/>
     <rect x="12" y="73" width="10" ry="4" height="30" fill="#5DCAA5" opacity="0.7"/>
     <rect x="68" y="73" width="10" ry="4" height="30" fill="#5DCAA5" opacity="0.7"/>
-    <text x="45" y="118" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Bíceps + Anteb.</text>
+    <text x="45" y="118" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Bíceps + Anteb.</text>
   </svg>`,
   'Tríceps': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -819,7 +819,7 @@ const MUSCLE_SVG = {
     <ellipse cx="68" cy="60" rx="8" ry="14" fill="#D4537E" opacity="0.85"/>
     <rect x="12" y="73" width="10" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <rect x="68" y="73" width="10" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="115" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Tríceps</text>
+    <text x="45" y="115" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Tríceps</text>
   </svg>`,
   'Tríceps + Peito': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -828,7 +828,7 @@ const MUSCLE_SVG = {
     <ellipse cx="22" cy="58" rx="9" ry="15" fill="#D4537E" opacity="0.85"/>
     <ellipse cx="68" cy="58" rx="9" ry="15" fill="#D4537E" opacity="0.85"/>
     <rect x="30" y="57" width="30" ry="4" height="36" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="107" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Tríceps + Peito</text>
+    <text x="45" y="107" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Tríceps + Peito</text>
   </svg>`,
   'Abdômen': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -840,7 +840,7 @@ const MUSCLE_SVG = {
     <rect x="32" y="76" width="12" ry="3" height="10" fill="#1D9E75" opacity="0.7"/>
     <rect x="46" y="76" width="12" ry="3" height="10" fill="#1D9E75" opacity="0.7"/>
     <rect x="30" y="88" width="30" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="124" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Abdômen</text>
+    <text x="45" y="124" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Abdômen</text>
   </svg>`,
   'Abdômen + Core': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -853,7 +853,7 @@ const MUSCLE_SVG = {
     <rect x="46" y="76" width="12" ry="3" height="10" fill="#5DCAA5" opacity="0.7"/>
     <ellipse cx="45" cy="55" rx="22" ry="28" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
     <rect x="30" y="88" width="30" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="124" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Abdômen + Core</text>
+    <text x="45" y="124" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Abdômen + Core</text>
   </svg>`,
   'Abdômen + Oblíquos': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -865,7 +865,7 @@ const MUSCLE_SVG = {
     <ellipse cx="27" cy="64" rx="7" ry="18" fill="#D4537E" opacity="0.75" transform="rotate(-10 27 64)"/>
     <ellipse cx="63" cy="64" rx="7" ry="18" fill="#D4537E" opacity="0.75" transform="rotate(10 63 64)"/>
     <rect x="30" y="85" width="30" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="120" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Abd. + Oblíquos</text>
+    <text x="45" y="120" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Abd. + Oblíquos</text>
   </svg>`,
   'Abdômen inferior': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -877,14 +877,14 @@ const MUSCLE_SVG = {
     <rect x="33" y="74" width="11" ry="3" height="9" fill="#1D9E75" opacity="0.9"/>
     <rect x="46" y="74" width="11" ry="3" height="9" fill="#1D9E75" opacity="0.9"/>
     <rect x="30" y="86" width="30" ry="4" height="28" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
-    <text x="45" y="122" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Abd. inferior</text>
+    <text x="45" y="122" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Abd. inferior</text>
   </svg>`,
   'Oblíquos': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <rect x="30" y="37" width="30" ry="4" height="48" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <ellipse cx="26" cy="62" rx="8" ry="20" fill="#D4537E" opacity="0.85" transform="rotate(-12 26 62)"/>
     <ellipse cx="64" cy="62" rx="8" ry="20" fill="#D4537E" opacity="0.85" transform="rotate(12 64 62)"/>
-    <text x="45" y="105" text-anchor="middle" font-size="9" fill="#6b6a66" font-family="sans-serif">Oblíquos</text>
+    <text x="45" y="105" text-anchor="middle" font-size="9" fill="#444444" font-family="sans-serif">Oblíquos</text>
   </svg>`,
   'Oblíquos + Core': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -892,7 +892,7 @@ const MUSCLE_SVG = {
     <ellipse cx="26" cy="62" rx="8" ry="20" fill="#D4537E" opacity="0.85" transform="rotate(-12 26 62)"/>
     <ellipse cx="64" cy="62" rx="8" ry="20" fill="#D4537E" opacity="0.85" transform="rotate(12 64 62)"/>
     <ellipse cx="45" cy="57" rx="16" ry="20" fill="none" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.6"/>
-    <text x="45" y="105" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Oblíquos + Core</text>
+    <text x="45" y="105" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Oblíquos + Core</text>
   </svg>`,
   'Core completo': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="30" rx="32" ry="8" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
@@ -904,14 +904,14 @@ const MUSCLE_SVG = {
     <ellipse cx="26" cy="64" rx="7" ry="18" fill="#D4537E" opacity="0.75" transform="rotate(-10 26 64)"/>
     <ellipse cx="64" cy="64" rx="7" ry="18" fill="#D4537E" opacity="0.75" transform="rotate(10 64 64)"/>
     <rect x="36" y="76" width="18" ry="3" height="10" fill="#5DCAA5" opacity="0.8"/>
-    <text x="45" y="105" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Core completo</text>
+    <text x="45" y="105" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Core completo</text>
   </svg>`,
   'Glúteo + Equilíbrio': `<svg viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="50" rx="30" ry="38" fill="#e8e4dd" stroke="#ccc" stroke-width="1"/>
     <ellipse cx="35" cy="58" rx="16" ry="22" fill="#1D9E75" opacity="0.85"/>
     <ellipse cx="55" cy="58" rx="16" ry="22" fill="#1D9E75" opacity="0.85"/>
     <rect x="38" y="84" width="14" ry="5" height="40" fill="#5DCAA5" opacity="0.7"/>
-    <text x="45" y="130" text-anchor="middle" font-size="8" fill="#6b6a66" font-family="sans-serif">Glúteo + Equil.</text>
+    <text x="45" y="130" text-anchor="middle" font-size="8" fill="#444444" font-family="sans-serif">Glúteo + Equil.</text>
   </svg>`,
 };
 
@@ -966,10 +966,19 @@ function getMuscleColor(muscle) {
 }
 
 function getMuscleSVG(muscle) {
+  // Primeiro tenta SVG inline (sempre funciona)
+  if (MUSCLE_SVG[muscle]) {
+    return MUSCLE_SVG[muscle] + `<div class="muscle-img-label">${muscle}</div>`;
+  }
+  // Fallback: tenta match parcial no SVG
+  const svgKey = Object.keys(MUSCLE_SVG).find(k => muscle.includes(k.split('+')[0].trim()) || k.includes(muscle.split('+')[0].trim()));
+  if (svgKey) {
+    return MUSCLE_SVG[svgKey] + `<div class="muscle-img-label">${muscle}</div>`;
+  }
+  // Último fallback: foto Pexels
   const img = MUSCLE_IMG[muscle] || MUSCLE_IMG[Object.keys(MUSCLE_IMG).find(k => muscle.includes(k.split('+')[0].trim())) || 'Abdômen'];
   const color = getMuscleColor(muscle);
-  return `<img src="${img}" alt="${muscle}" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none'">
-    <div class="muscle-img-label">${muscle}</div>`;
+  return `<img src="${img}" alt="${muscle}" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none'"><div class="muscle-img-label">${muscle}</div>`;
 }
 
 let _slideDir = 1;
@@ -998,23 +1007,24 @@ function renderTimeline(idx, total, lv) {
 }
 
 function animateSlide(dir, updateFn) {
+  const wrap = document.querySelector('.ex-slide-wrap');
   const inner = document.getElementById('ex-slide-inner');
-  const slide = document.getElementById('ex-slide-0');
-  if (!inner || !slide) { updateFn(); return; }
-  // slide out
-  inner.style.transition = 'transform 0.30s cubic-bezier(.4,0,.2,1)';
-  inner.style.transform = 'translateX(' + (dir > 0 ? '-100%' : '100%') + ')';
+  if (!inner || !wrap) { updateFn(); return; }
+  const w = wrap.offsetWidth;
+  // Slide current content out
+  inner.style.transition = 'transform 0.28s cubic-bezier(.4,0,.2,1)';
+  inner.style.transform = 'translateX(' + (dir > 0 ? -w : w) + 'px)';
   setTimeout(() => {
     inner.style.transition = 'none';
-    inner.style.transform = 'translateX(' + (dir > 0 ? '100%' : '-100%') + ')';
+    inner.style.transform = 'translateX(' + (dir > 0 ? w : -w) + 'px)';
     updateFn();
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        inner.style.transition = 'transform 0.30s cubic-bezier(.4,0,.2,1)';
+        inner.style.transition = 'transform 0.28s cubic-bezier(.4,0,.2,1)';
         inner.style.transform = 'translateX(0)';
       });
     });
-  }, 300);
+  }, 280);
 }
 
 function toggleNextSection() {
@@ -1099,14 +1109,9 @@ function renderEx(){
   }
   document.getElementById('muscle-svg-wrap').innerHTML=getMuscleSVG(ex.muscle);
 
-  // Swap button — locked after workout starts (only available before starting first exercise)
+  // Swap disponível em todos os exercícios
   const swapBtn = document.getElementById('swap-btn');
-  if (swapBtn) {
-    const isFirstEx = idx === 0;
-    swapBtn.style.opacity = isFirstEx ? '1' : '0.4';
-    swapBtn.style.pointerEvents = isFirstEx ? 'auto' : 'none';
-    swapBtn.title = isFirstEx ? '' : 'Troca disponível antes de iniciar o treino';
-  }
+  if (swapBtn) { swapBtn.style.opacity='1'; swapBtn.style.pointerEvents='auto'; swapBtn.title=''; }
 
   const nl=document.getElementById('next-list'); nl.innerHTML='';
   for(let i=idx+1;i<Math.min(idx+5,total);i++){
